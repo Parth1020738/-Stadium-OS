@@ -1,9 +1,12 @@
 import logging
+import asyncio
 from typing import Dict, Any, List
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
+from sqlalchemy import func
 from backend.app.models.knowledge import KnowledgeDocument
 from backend.app.models.incident import Incident
+from backend.app.core.config import settings
 
 logger = logging.getLogger("copilot_service")
 
@@ -12,6 +15,9 @@ class AICopilotService:
         self.db = db
 
     async def answer_operator_query(self, query: str) -> Dict[str, Any]:
+        if settings.ENABLE_MOCK_AI:
+            await asyncio.sleep(0.4) # Simulate LLM inference delay
+            
         query_lower = query.lower()
         
         # 1. "What is happening?" or general status

@@ -1,11 +1,13 @@
 import json
 import logging
+import asyncio
 from datetime import datetime, timezone
 from typing import Optional, List, Dict, Any
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import func
 
+from backend.app.core.config import settings
 from backend.app.core.kafka_producer import kafka_producer
 from backend.app.core.redis import redis_manager
 
@@ -74,6 +76,9 @@ class RiskPredictionService(BaseAIService):
         )
 
     async def calculate_live_risk(self) -> AIRiskAssessment:
+        if settings.ENABLE_MOCK_AI:
+            await asyncio.sleep(0.3)
+            
         # Check Redis density key
         density = await redis_manager.client.get("dashboard:metrics:average_density")
         density_val = float(density.decode("utf-8")) if density else 0.45
@@ -217,6 +222,9 @@ class AIDecisionService(BaseAIService):
         return await self.rec_repo.list_recommendations(limit=limit, offset=offset, status=status)
 
     async def generate_recommendations(self) -> List[AIRecommendation]:
+        if settings.ENABLE_MOCK_AI:
+            await asyncio.sleep(0.3)
+            
         # Gather live values from Redis
         density = await redis_manager.client.get("dashboard:metrics:average_density")
         density_val = float(density.decode("utf-8")) if density else 0.45

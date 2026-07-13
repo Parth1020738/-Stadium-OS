@@ -22,7 +22,6 @@ class KafkaProducerClient:
                 value_serializer=lambda v: json.dumps(v).encode('utf-8'),
                 key_serializer=lambda k: str(k).encode('utf-8') if k else None,
                 acks='all',  # Wait for all replicas
-                retries=self._max_retries,
                 enable_idempotence=True  # Exactly-once semantics
             )
             await self.producer.start()

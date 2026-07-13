@@ -8,6 +8,13 @@ class Settings(BaseSettings):
     KAFKA_BOOTSTRAP_SERVERS: str
     JWT_SECRET: str
     
+    # AI Configuration
+    ENABLE_MOCK_AI: bool = True
+    AI_PROVIDER: str = "mock"
+    USE_REAL_GEMINI: bool = False
+    GEMINI_API_KEY: str = "MOCK_MODE"
+    GEMINI_MODEL: str = "gemini-1.5-flash"
+    
     # Load from environment variables and fallback to files
     model_config = SettingsConfigDict(
         env_file=".env",
