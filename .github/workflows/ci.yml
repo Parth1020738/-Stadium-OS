@@ -1,0 +1,120 @@
+name: Aegis CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Format checks (TypeScript)
+        run: pnpm run format:ts --check
+
+      - name: Lint checks (TypeScript)
+        run: pnpm run lint:ts
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install Python tools
+        run: |
+          pip install ruff pytest httpx
+
+      - name: Format checks (Python)
+        run: ruff format . --check
+
+      - name: Lint checks (Python)
+        run: ruff check .
+
+  unit-testing:
+    needs: lint-and-format
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: aegis_test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run JS tests
+        run: pnpm run test:ts
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r backend/requirements.txt
+          pip install -r ai/requirements.txt
+
+      - name: Run Python tests (SQLite)
+        run: pytest tests/
+
+      - name: Run Python tests (PostgreSQL)
+        env:
+          TEST_DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/aegis_test_db
+        run: pytest tests/
+
+  container-security-scans:
+    needs: unit-testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Backend container
+        run: docker build -t aegis-backend:latest ./backend
+
+      - name: Run Trivy security scan on Backend image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'aegis-backend:latest'
+          format: 'table'
+          exit-code: '0' # Alert but don't fail for foundation templates
+          severity: 'CRITICAL,HIGH'

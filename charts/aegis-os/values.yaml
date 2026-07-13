@@ -1,0 +1,33 @@
+replicaCount: 2
+
+image:
+  repository: aegis-backend
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  className: "nginx"
+  hosts:
+    - host: aegis.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1024Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+env:
+  redisUrl: "redis://aegis-redis:6379/0"
+  kafkaBootstrap: "aegis-kafka:9092"
+  dbUrl: "postgresql+asyncpg://postgres:postgres@aegis-postgres:5432/aegis_db"
+  jwtSecret: "helmproductionsecret"

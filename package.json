@@ -1,0 +1,20 @@
+{
+  "name": "aegis-monorepo",
+  "version": "1.0.0",
+  "description": "Aegis Smart Stadium OS - Phase 1 Foundation",
+  "private": true,
+  "scripts": {
+    "bootstrap": "pnpm install",
+    "lint:ts": "eslint \"**/*.ts\" \"**/*.tsx\"",
+    "format:ts": "prettier --write \"**/*.{ts,tsx,json,css,md}\"",
+    "test:ts": "npm run test --prefix api-gateway",
+    "build:all": "pnpm --filter \"*\" build"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "prettier": "^3.1.1",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1"
+  }
+}

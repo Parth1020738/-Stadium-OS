@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aegis-config
+  namespace: aegis
+data:
+  REDIS_URL: "redis://aegis-redis:6379/0"
+  KAFKA_BOOTSTRAP_SERVERS: "aegis-kafka:9092"
+  LOG_LEVEL: "INFO"

@@ -1,0 +1,29 @@
+{
+  "name": "aegis-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-native": "^0.73.1",
+    "@react-navigation/native": "^6.1.9",
+    "@react-navigation/native-stack": "^6.9.17",
+    "react-native-sqlite-storage": "^6.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@tsconfig/react-native": "^3.0.0",
+    "@types/jest": "^29.5.11",
+    "@types/react": "^18.2.45",
+    "typescript": "^5.3.3",
+    "jest": "^29.7.0"
+  }
+}
