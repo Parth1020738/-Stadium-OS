@@ -1,0 +1,2947 @@
+{
+  "timestamp": "2026-07-13T14:37:21.048Z",
+  "results": {
+    "crowd": {
+      "status": "PASS",
+      "error": null
+    },
+    "incidents": {
+      "status": "PASS",
+      "error": null
+    },
+    "volunteers": {
+      "status": "PASS",
+      "error": null
+    },
+    "transit": {
+      "status": "PASS",
+      "error": null
+    },
+    "accessibility": {
+      "status": "PASS",
+      "error": null
+    },
+    "knowledge": {
+      "status": "PASS",
+      "error": null
+    },
+    "ai": {
+      "status": "PASS",
+      "error": null
+    },
+    "command_center": {
+      "status": "PASS",
+      "error": null
+    },
+    "reports": {
+      "status": "PASS",
+      "error": null
+    },
+    "settings": {
+      "status": "PASS",
+      "error": null
+    },
+    "health": {
+      "status": "PASS",
+      "error": null
+    }
+  },
+  "consoleLogs": [
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://localhost:3000/knowledge",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Fast Refresh] rebuilding",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Fast Refresh] done in 760ms",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://localhost:3000/reports",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Fast Refresh] rebuilding",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Fast Refresh] done in 558ms",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "location": {
+        "url": "http://localhost:3000/health",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "Connecting to WebSocket: ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: metrics",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    },
+    {
+      "type": "log",
+      "text": "WebSocket connected to channel: alerts",
+      "location": {
+        "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+        "line": 2477,
+        "column": 27,
+        "lineNumber": 2477,
+        "columnNumber": 27
+      }
+    }
+  ],
+  "networkLogs": [
+    {
+      "url": "http://localhost:3000/login",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_(auth)_login_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0oqqjeh._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_0t86aw3._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:8000/api/v1/auth/login",
+      "method": "POST",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/?_rsc=qYT2Wy2QR8kXuUU6",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/?_rsc=qYT2Wy2QR8kXuUU6",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_lucide-react_dist_esm_icons_10fkawt._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_08rn-mk._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_08rn-mk._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_lucide-react_dist_esm_icons_10fkawt._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/crowd",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_crowd_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0ms59mz._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_07avhj2._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/incidents",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:8000/api/v1/zones/",
+      "method": "GET",
+      "status": null,
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_incidents_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_1zspo2g._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_1u_w2uh._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/volunteers",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:8000/api/v1/incidents?search=Security+Guard+dispatch+request",
+      "method": "GET",
+      "status": null,
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://localhost:8000/api/v1/incidents",
+      "method": "GET",
+      "status": null,
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_volunteers_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_11wb4ph._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_1-yeh_t._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/transit",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:8000/api/v1/volunteers",
+      "method": "GET",
+      "status": null,
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_19gir5-._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_transit_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_0kxv9kb._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/accessibility",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:8000/api/v1/transit/routes",
+      "method": "GET",
+      "status": null,
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_accessibility_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_1jghq3j._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_11_pck6._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/knowledge",
+      "method": "GET",
+      "status": 404,
+      "error": null
+    },
+    {
+      "url": "http://localhost:8000/api/v1/venues/stadium_main/accessibility/barriers",
+      "method": "GET",
+      "status": null,
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/ai",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_1zl0969._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_ai_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_1-l6fm4._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/__nextjs_font/geist-latin.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/command-center",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:8000/api/v1/ai/recommendations",
+      "method": "GET",
+      "status": null,
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://localhost:8000/api/v1/ai/risk",
+      "method": "GET",
+      "status": null,
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_command-center_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0sjbvw0._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/__nextjs_font/geist-latin.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_1vqxps3._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/reports",
+      "method": "GET",
+      "status": 404,
+      "error": null
+    },
+    {
+      "url": "http://localhost:8000/api/v1/commands",
+      "method": "GET",
+      "status": null,
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/__nextjs_font/geist-latin.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/settings",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_settings_page_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/__nextjs_font/geist-latin.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1ym184a._.js",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/health",
+      "method": "GET",
+      "status": 404,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0c7uqo1._.css",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_20oip0n._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_next-devtools_index_0vs3za3.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-dom_0fow_-_._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_react-server-dom-turbopack_0v5tlyh._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_compiled_15bjnwr._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_1_lqfg0._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_0sru9kl._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_1anvha4._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/turbopack-frontend_19rx_fe._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_15y20fd._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_%40swc_helpers_cjs_1krgk_y._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_0_-7n3v._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_layout_tsx_109f7on._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_077akux._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/frontend_src_app_not-found_tsx_1x22_rj._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/19xk_next_dist_client_components_builtin_global-error_1x22_rj.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_00j6k-m._.js",
+      "method": "GET",
+      "status": 304,
+      "error": null
+    },
+    {
+      "url": "http://localhost:3000/__nextjs_font/geist-latin.woff2",
+      "method": "GET",
+      "status": 200,
+      "error": null
+    }
+  ],
+  "wsConnections": [
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=YCg5IXusfhmEjhdNwpYwB",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=TTwBW6haIq_wyosvrfvhu",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=srjeWmxvRa20mngndvKDA",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=GnJGKcnwYS-YJwPD1xtrU",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=Qc1cbWhAuKcq56FCV2A6N",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=IYJhxZGhGd8vG0vOB1SSJ",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=A4zGWbzJ0Jz_NZgv3vFbs",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=fI-zVJ6RGWKTD4GrVTQBh",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=Zxs7pStl4R6jqQpx7qqKI",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=yDoZEefoKMOMx-Zx9m41h",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=dxW7MgtKUqwnNXHwVwbf6",
+      "status": "Closed"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:3000/_next/webpack-hmr?id=ZnYrT-CZchWWJ-dacduvN",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/metrics?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    },
+    {
+      "url": "ws://localhost:8000/ws/dashboard/alerts?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiT3BlcmF0b3IiLCJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTc4Mzk1NDMxMSwiaWF0IjoxNzgzOTUzNDExLCJqdGkiOiIxMjY5NmY4NS00OGZmLTQ3OGQtODYxOC0zNTJkNWRhMGU0ZWIifQ.2c_Fy8U_MFPFL_915XVfiRO-BkaOEsf6j1QxxBH1W4c",
+      "status": "Connected"
+    }
+  ],
+  "pageErrors": []
+}

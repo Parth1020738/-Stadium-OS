@@ -14,11 +14,13 @@ test.describe("Aegis Browser Automation Verification", () => {
   let pageErrors: Array<string> = [];
 
   test.beforeEach(async ({ page }) => {
+    // Reset lists
     consoleLogs = [];
     networkLogs = [];
     wsConnections = [];
     pageErrors = [];
 
+    // Capture console logs
     page.on("console", (msg) => {
       consoleLogs.push({
         type: msg.type(),
@@ -27,8 +29,14 @@ test.describe("Aegis Browser Automation Verification", () => {
       });
     });
 
+    // Capture page errors
     page.on("pageerror", (err) => {
       pageErrors.push(err.message);
+    });
+
+    // Capture network requests
+    page.on("request", (req) => {
+      // Just record requests initially
     });
 
     page.on("response", (res) => {
@@ -49,6 +57,7 @@ test.describe("Aegis Browser Automation Verification", () => {
       });
     });
 
+    // Capture WebSockets
     page.on("websocket", (ws) => {
       wsConnections.push({ url: ws.url(), status: "Connected" });
       ws.on("close", () => {
@@ -63,7 +72,6 @@ test.describe("Aegis Browser Automation Verification", () => {
   });
 
   test("Verify Aegis Application Pages and Workflows", async ({ page }) => {
-    test.setTimeout(120000);
     // 1. Visit login page
     console.log("Navigating to login page...");
     await page.goto("/login");
@@ -105,13 +113,17 @@ test.describe("Aegis Browser Automation Verification", () => {
         await page.waitForTimeout(2000); // Allow data fetching
         await page.screenshot({ path: path.join(LOG_DIR, p.screenshot) });
 
+        // Submit form in pages if applicable
         if (p.path === "/incidents") {
           console.log("Executing Incident form workflow...");
+          // Let's see if we can find form fields
           const titleInput = page.locator('input[placeholder*="Title" i], input[name*="title" i], input[id*="title" i]');
           if (await titleInput.count() > 0) {
             await titleInput.first().fill("Security Guard dispatch request");
             const descInput = page.locator('textarea[placeholder*="Description" i], textarea[name*="description" i]');
             if (await descInput.count() > 0) await descInput.first().fill("Gate 3 crowd build up reporting");
+            
+            // Try to find submit button or form submit
             const submitBtn = page.locator('button[type="submit"], button:has-text("Create"), button:has-text("Submit")');
             if (await submitBtn.count() > 0) {
               await submitBtn.first().click();
@@ -153,11 +165,12 @@ test.describe("Aegis Browser Automation Verification", () => {
       }
     }
 
+    // Save logs and metadata to verification_results.json
     const finalReport = {
       timestamp: new Date().toISOString(),
       results,
       consoleLogs,
-      networkLogs: networkLogs.filter(n => !n.url.startsWith("data:")),
+      networkLogs: networkLogs.filter(n => !n.url.startsWith("data:")), // Filter base64 assets
       wsConnections,
       pageErrors
     };
