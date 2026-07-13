@@ -8,7 +8,7 @@ if (!fs.existsSync(LOG_DIR)) {
 }
 
 test.describe("Aegis Browser Automation Verification", () => {
-  let consoleLogs: Array<{ type: string; text: string; location: any }> = [];
+  let consoleLogs: Array<{ type: string; text: string; location: Record<string, unknown> }> = [];
   let networkLogs: Array<{ url: string; method: string; status: number | null; error: string | null }> = [];
   let wsConnections: Array<{ url: string; status: string }> = [];
   let pageErrors: Array<string> = [];
@@ -82,7 +82,7 @@ test.describe("Aegis Browser Automation Verification", () => {
     await page.waitForTimeout(3000); // Wait for WebSockets and UI state to populate
     await page.screenshot({ path: path.join(LOG_DIR, "02_dashboard_home.png") });
 
-    const results: any = {};
+    const results: Record<string, { status: string; error: string | null }> = {};
 
     const pagesToTest = [
       { path: "/crowd", name: "crowd", screenshot: "03_crowd_heatmap.png" },
@@ -147,9 +147,9 @@ test.describe("Aegis Browser Automation Verification", () => {
         }
 
         results[p.name] = { status: "PASS", error: null };
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error(`Failed testing page ${p.path}:`, err);
-        results[p.name] = { status: "FAIL", error: err.message };
+        results[p.name] = { status: "FAIL", error: err instanceof Error ? err.message : String(err) };
       }
     }
 
