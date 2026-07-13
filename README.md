@@ -1,141 +1,258 @@
-# Aegis Smart Stadium OS
+# 🏟️ Aegis Smart Stadium OS
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Parth1020738/-Stadium-OS)
 [![Tests Status](https://img.shields.io/badge/tests-53%20passed-green)](https://github.com/Parth1020738/-Stadium-OS)
 [![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 [![Release Version](https://img.shields.io/badge/release-v1.0.0-orange)](https://github.com/Parth1020738/-Stadium-OS/releases/tag/v1.0.0)
 
-Aegis Smart Stadium OS is a hybrid edge-to-cloud platform built for automated crowd safety, security dispatch, and real-time operations coordination. Designed for high-concurrency event telemetry, it features real-time zone density analysis, volunteer scheduling, fleet dispatch, accessibility routing, and AI-driven playbook suggestions.
+Aegis Smart Stadium OS is an advanced, high-concurrency event telemetry and coordination platform designed for automated crowd safety, security dispatch, and real-time operations inside large stadiums. Built using an edge-to-cloud model, it features live zone density analysis, volunteer scheduling, fleet dispatch coordination, accessibility routing, and AI-driven playbook suggestions.
 
 ---
 
-## 1. Overview & Architecture
+## 1. Project Overview
 
-The Aegis platform provides a modular, reliable framework for stadium staff:
-- **Real-Time Data Aggestion**: WebSockets ingest camera occupancy and transit metrics continuously.
-- **Optimistic Concurrency Guards**: Prevent database record conflicts under high request concurrency.
-- **RAG Suggestion Engine**: Automatically parses emergency playbooks (SOP logs) using semantic similarity matching.
-- **Command Approval Gateways**: Multi-operator confirmation paths protect critical stadium actions.
+Aegis Smart Stadium OS serves as a centralized operating system for stadium staff, security personnel, volunteers, and emergency responders during large-scale sports and entertainment events. Under extreme concurrency, Aegis integrates real-time telemetry from video analysis nodes (mocked), ticket turnstiles, and mobile user coordinates to deliver a single pane of glass for stadium safety.
 
-```
-                   +------------------------+
-                   |   Next.js Front-end    |
-                   +-----------+------------+
-                               | (REST / WebSockets)
-                               v
-                   +-----------+------------+
-                   |    FastAPI Back-end    |
-                   +-----+-----------+------+
-                         |           |
-             (SQLAlchemy)|           | (Redis Cache)
-                         v           v
-                   +-----+----+ +----+------+
-                   | Postgres | |  Redis   |
-                   +----------+ +-----------+
-```
+### ⚠️ Problem Statement
+Large sports and concert venues often struggle with operational fragmentation during events:
+1. **Crowd Congestion**: Delays at gates and pathways create severe bottleneck zones, posing safety and evacuation risks.
+2. **Delayed Dispatch**: Security and medical responders lose critical minutes due to uncoordinated dispatch systems.
+3. **Accessibility Obstacles**: Disabled attendees face sudden route closures or lack real-time transit accessibility routing.
+4. **Information Silos**: Command centers make high-stakes decisions without unified event logs or real-time standard operating procedures (SOPs).
+
+### 🏆 Challenge Vertical
+Aegis aligns directly with the **Smart Infrastructure, Crowd Safety, and Real-Time Event Management** vertical. It leverages high-performance backend pipelines, real-time reactive frontend frameworks, and AI recommendation systems to establish a robust framework for safer and more accessible smart stadiums.
 
 ---
 
-## 2. Technology Stack
+## 2. Platform Architecture
 
-- **Backend**: FastAPI (Python 3.11), SQLAlchemy, PostgreSQL (pgvector), Redis (blacklists/caching), Kafka (event brokers).
-- **Frontend**: Next.js 16 (App Router, TypeScript), Zustand, TailwindCSS, Vitest.
-- **Infrastructure**: Nginx, Docker Compose, Kubernetes, Helm.
-- **Observability**: Prometheus, Grafana, Loki, Promtail, Jaeger.
+Aegis OS uses a decoupled, event-driven service-oriented architecture:
+
+```
+                            +-----------------------------------+
+                            |        Next.js Frontend           |
+                            |       (React 19 & Zustand)        |
+                            +-----------------+-----------------+
+                                              |
+                                              | (REST / WebSockets)
+                                              v
+                            +-----------------+-----------------+
+                            |         API Gateway               |
+                            |       (NestJS Proxy Gateway)      |
+                            +-----------------+-----------------+
+                                              |
+                                              | (FastAPI Service Layer)
+                                              v
+                            +-----------------+-----------------+
+                            |         FastAPI Backend           |
+                            |       (Python 3.12 / Async)       |
+                            +----+------------+------------+----+
+                                 |            |            |
+                    (SQLAlchemy) |            | (Redis)    | (Kafka Events)
+                                 v            v            v
+                            +----+----+  +----+----+  +----+----+
+                            | SQLite  |  |  Redis  |  |  Kafka  |
+                            | (Aegis) |  |  Cache  |  | Broker  |
+                            +---------+  +---------+  +---------+
+```
+
+### 🖥️ Frontend
+- **Framework**: Next.js 16 (App Router) using React 19.
+- **State Management**: Zustand for light, high-performance global store synchronization.
+- **Styling**: TailwindCSS 4 and CSS Variables for custom themes.
+- **Client Networking**: Axios for REST, native WebSockets for telemetry streams.
+
+### ⚙️ Backend
+- **Framework**: FastAPI (Python 3.12) with fully asynchronous database sessions.
+- **Database ORM**: SQLAlchemy with Alembic migration schema.
+- **Database Engine**: SQLite (default local) or PostgreSQL with `pgvector` for vector embedding matching.
+- **Caching**: Redis for session invalidation and telemetry metadata store.
+
+### 🧠 AI Engine
+- **LLM Integrations**: Google Gemini API integration (`gemini-1.5-flash`).
+- **Playbook Suggestions**: RAG (Retrieval-Augmented Generation) engine utilizing local semantic similarity matching of SOP logs.
+- **Mock AI Mode**: Standardized fail-safe mock fallback modes to guarantee operation during offline/sandbox execution.
+
+### 🛡️ Command Center & Security Guards
+- **Multi-Operator Approvals**: Dual-signature confirmation gates for critical operations (e.g., dispatching emergency services, structural lockdowns).
+- **Concurrency Guards**: Optimistic locking schemes prevent race conditions when two dispatchers assign the same volunteer resources simultaneously.
 
 ---
 
-## 3. Folder Structure
+## 3. Features
+
+- **Real-Time Crowd Density Heatmaps**: Live occupancy updates for all stadium zones with automatic congestion alert indicators.
+- **Volunteer Rostering & Shift Management**: Automated dispatch, attendance validation, and shift logs.
+- **Transit & Dispatch Optimization**: Real-time tracking of stadium golf carts, shuttle vans, and medical responders.
+- **Accessibility Navigation Portal**: Elevators/ramp status tracking and customized wheelchair-accessible routing.
+- **AI-Copilot Emergency SOPs**: Real-time suggestions for responder teams based on historical incident reports and playbooks.
+- **Command & Control Operations Room**: Consolidated dashboard showing pending alerts, active dispatches, system health metrics, and manual overrides.
+
+---
+
+## 4. Folder Structure
 
 ```
+├── .github/                  # GitHub Issue & PR template configurations
+├── ai/                       # Local AI model configurations and mock playbooks
+├── alembic/                  # Database migration schemas
+├── api-gateway/              # NestJS microservices proxy API Gateway
 ├── backend/                  # FastAPI Backend API Server
+│   ├── app/
+│   │   ├── api/              # API Route endpoints (v1)
+│   │   ├── core/             # Configuration & security files
+│   │   ├── models/           # SQLAlchemy DB models
+│   │   ├── repositories/     # Database operations repository pattern
+│   │   └── services/         # Core business logic processing
+│   └── requirements.txt      # Python dependencies manifest
+├── charts/                   # Helm charts for Kubernetes deployments
+├── docs/                     # System architecture & walkthrough screenshots
+│   └── screenshots/          # Embedded UI mockup images
 ├── frontend/                 # Next.js Frontend Dashboard Client
-├── shared/                   # Common modules (TypeScript / Python Logger)
-├── infrastructure/           # Logging & reverse proxy configurations
-├── charts/                   # Helm charts (Kubernetes deployments)
+│   ├── __tests__/            # Frontend unit and E2E test suites
+│   ├── src/
+│   │   ├── app/              # Next.js Page components
+│   │   ├── components/       # Reusable layout UI blocks
+│   │   └── store/            # Zustand global stores
+│   └── package.json          # Node dependencies manifest
 ├── k8s/                      # Kubernetes YAML manifest templates
-├── tests/                    # Backend regression test suites
-├── docs/                     # System architecture specifications
-├── scripts/                  # Cleanup and launch commands
-└── GITHUB_DEPLOYMENT_REPORT.md
+├── scripts/                  # DevOps build, reset, and deploy scripts
+└── tests/                    # Backend pytest sequential test suites
 ```
 
 ---
 
-## 4. Quick Start & Setup
+## 5. Quick Start & Installation
 
-### 4.1 Prerequisites
-- Python 3.11+
-- Node.js 20+ (with `pnpm` or `npm`)
-- Docker & Docker Compose
+### 5.1 Prerequisites
+- **Python**: v3.11 or v3.12
+- **Node.js**: v20.x or higher
+- **Package Managers**: `pnpm` (preferred) or `npm`
+- **Docker**: Desktop / Compose (optional)
 
-### 4.2 Environment Variables
-Create a local `.env` file in the root directory:
+### 5.2 Environment Variables
+Create a `.env` file in the root directory (based on `.env.example`):
 ```env
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/aegis_db
+# Core Configuration
+NODE_ENV=development
+PORT=3000
+
+# Databases
+DATABASE_URL=sqlite:///./aegis.db
 REDIS_URL=redis://localhost:6379/0
 KAFKA_BOOTSTRAP_SERVERS=localhost:9092
-JWT_SECRET=super-secret-key-change-in-production
+
+# Security
+JWT_SECRET=super-secure-jwt-secret-key-32-chars-long
+JWT_ALGORITHM=HS256
+
+# AI Configuration
+ENABLE_MOCK_AI=true
+AI_PROVIDER=mock
+USE_REAL_GEMINI=false
+GEMINI_API_KEY=MOCK_MODE
 ```
 
-### 4.3 Backend Setup
-```bash
-# Set up Python virtual environment
-python -m venv .venv
-source .venv/bin/activate # On Windows: .venv\Scripts\activate
+*Note: Copy `.env.example` in `backend/` and `frontend/` directories as well to ensure local dev execution config matches this setup.*
 
-# Install dependencies
+---
+
+## 6. Running Locally
+
+### 6.1 Backend API Server Setup
+```bash
+# Navigate to backend or root and activate virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+# Install requirements
 pip install -r backend/requirements.txt
 
-# Run migrations
+# Run migrations to initialize local SQLite DB (aegis.db)
 alembic upgrade head
 
-# Start API server
+# Start local dev server
 uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
 ```
 
-### 4.4 Frontend Setup
+### 6.2 Frontend Dashboard Setup
 ```bash
+# Navigate to frontend folder
 cd frontend
+
+# Install package dependencies
 pnpm install
+
+# Build NextJS production layout
 pnpm run build
+
+# Start dev server locally
 pnpm run dev
 ```
+Open [http://localhost:3000](http://localhost:3000) to view the application dashboard.
 
-### 4.5 Docker Stack Setup
+### 6.3 Run with Docker Compose
+If you prefer running the full stack containerized:
 ```bash
+# Start all services (Database, Redis, API Server, Gateway, NextJS Client)
 docker-compose up -d
 ```
 
-### 4.6 Kubernetes / Helm Deployment
+### 6.4 Kubernetes Deployment
+Deploy the Aegis stack to your K8s cluster using Helm:
 ```bash
+# Validate chart templates
+helm lint charts/aegis-os/
+
+# Deploy chart release
 helm install aegis-release charts/aegis-os/
 ```
 
 ---
 
-## 5. Testing & Quality Assurance
+## 7. Testing & QA Verification
 
-Run all test suites locally:
+The repository contains end-to-end and unit test coverages for both backend and frontend layers:
+
 ```bash
-# Backend sequential suite
+# Execute Backend tests sequentially
 python tests/backend/run_tests.py
 
-# Frontend unit testing
+# Execute Frontend unit tests (Vitest)
 cd frontend
 pnpm run test
+
+# Run typescript linter verification
+pnpm run lint:ts
 ```
 
 ---
 
-## 6. Screenshots & Interface Preview
+## 8. Interface Previews
 
-*Screenshots and UI mockups demonstrating the Command Console, Crowd Heatmap, and AI recommendation panels are archived in [walkthrough.md](./walkthrough.md).*
+### 📊 System Operations Dashboard
+Live crowd safety charts, alert queues, shuttle dispatches, and infrastructure metrics are visualised in real-time.
+![Operations Dashboard](./docs/screenshots/dashboard_preview.png)
+
+### 🚨 Command Approval Console
+Multi-operator confirmation paths protect stadium zones, dispatch units, and manage event overrides.
+![Command Approval Console](./docs/screenshots/command_center_preview.png)
+
+### 🔥 Stadium Crowd Heatmap
+3D mapping indicators show congestion levels and path hazards across all stadium sectors.
+![Stadium Heatmap](./docs/screenshots/crowd_heatmap_preview.png)
 
 ---
 
-## 7. License & Authors
+## 9. Future Scope
+- **Edge Camera Integration**: Deploy physical RTSP pipelines and run low-latency YOLO models for real-time occupant estimation.
+- **Offline Mesh Networks**: Support Bluetooth Low Energy (BLE) fallback beacons for emergency dispatches when stadium cell networks crash.
+- **Dynamic Evacuation Optimization**: Implement path-finding algorithms to dynamically redirect crowd traffic away from hazard zones.
 
+---
+
+## 10. License & Authors
 - **License**: MIT License
 - **Author**: Parth Patel (Parth1020738)
 - **Repository**: [https://github.com/Parth1020738/-Stadium-OS](https://github.com/Parth1020738/-Stadium-OS)
