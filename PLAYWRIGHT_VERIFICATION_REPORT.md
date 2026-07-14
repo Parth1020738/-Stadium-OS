@@ -1,13 +1,62 @@
-# Playwright Verification Report
+# Playwright E2E Test Results
 
-## Overview
-This report documents the automation test coverage implemented using Playwright on the Next.js frontend application.
+## Test Infrastructure Status
 
-## Test Scenarios & Results
-- **Authentication**: Validates that unauthenticated users are correctly redirected to `/login`, and logged-in operators bypass login routes.
-- **Console Audit**: Audits browser developer console logs during navigation to verify no React errors or JS stack-trace failures occur.
-- **WebSocket Reconnection**: Ensures metrics and alert streams successfully initialize and reconnect when server interruptions occur.
-- **Route Navigation**: Iterates through all sidebar links to confirm that no requests result in 404 responses or failed API errors.
+| Component | Status |
+|-----------|--------|
+| Playwright Test Runner | ✅ PASS |
+| Test Configuration | ✅ PASS |
+| Test Files Detected | ✅ PASS (2 tests found) |
+| Dev Server (localhost:3000) | ✅ PASS (HTTP 200) |
+| Chromium Headless Browser | ⚠️ Launch Timeout (180s) |
 
-## Execution Output
-All browser automation scripts ran successfully under headless Chromium, confirming layout stabilization and correct RBAC path routing.
+## Test Details
+
+### Test 1: `e2e/e2e.test.ts` - Aegis Browser Automation Verification
+- **Status:** ❌ FAILED (browser launch timeout)
+- **Error:** `browserType.launch: Timeout 180000ms exceeded`
+- **Cause:** Headless Chrome failed to launch within timeout in headless_shell mode on Windows
+
+### Test 2: `e2e/e2e_verification.test.ts` - Aegis Application Pages and Workflows  
+- **Status:** ❌ FAILED (browser launch timeout)
+- **Error:** `browserType.launch: Timeout 180000ms exceeded`
+- **Cause:** Same headless launch issue
+
+## Root Cause Analysis
+
+The chrome-headless-shell binary failed to initialize within 180 seconds. This is typically caused by:
+1. Resource constraints on the test machine
+2. Antivirus interference with browser launch
+3. Missing display server dependencies
+
+## Resolution Steps
+
+To run tests successfully on this machine:
+
+```bash
+# Option 1: Run with headed mode (non-headless)
+cd frontend
+npx playwright test --headed
+
+# Option 2: Increase launch timeout in playwright.config.ts
+# Add to config: launchOptions: { timeout: 300000 }
+
+# Option 3: Use Chromium instead of headless shell
+# npx playwright test --browser=chromium
+```
+
+## Verification Summary
+
+Despite the browser launch timeout, the test infrastructure is correctly configured:
+- ✅ Playwright config points to `./e2e` directory
+- ✅ 2 E2E test files present in `frontend/e2e/`
+- ✅ Frontend dev server running on port 3000
+- ✅ Server responds with HTTP 200 on all routes
+- ✅ Test framework properly discovers and attempts execution
+
+## Screenshots & Artifacts
+
+When tests run successfully, artifacts are stored in:
+- `frontend/test-results/` - Test videos and error contexts
+- `frontend/playwright-report/` - HTML test report
+- `browser_logs/` - Screenshots and verification results
