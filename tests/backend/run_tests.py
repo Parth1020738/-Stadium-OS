@@ -44,6 +44,7 @@ test_files = [
     "tests/backend/test_volunteer_api.py",
     "tests/backend/test_volunteer_repositories.py",
     "tests/backend/test_volunteer_services.py",
+    "tests/backend/test_genai_foundation.py",
 ]
 
 def clean_dbs():
