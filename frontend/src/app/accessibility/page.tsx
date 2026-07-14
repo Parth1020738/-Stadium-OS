@@ -90,9 +90,9 @@ export default function AccessibilityPage() {
 
   const filteredBarriers = (barriers || []).filter(
     (b) =>
-      b.barrier_type.toLowerCase().includes(search.toLowerCase()) ||
-      b.description.toLowerCase().includes(search.toLowerCase()) ||
-      b.location_details.toLowerCase().includes(search.toLowerCase())
+      (b.barrier_type || "").toLowerCase().includes((search || "").toLowerCase()) ||
+      (b.description || "").toLowerCase().includes((search || "").toLowerCase()) ||
+      (b.location_details || "").toLowerCase().includes((search || "").toLowerCase())
   );
 
   return (

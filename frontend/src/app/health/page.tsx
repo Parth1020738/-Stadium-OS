@@ -82,17 +82,32 @@ export default function HealthPage() {
     };
   }, [autoRefresh]);
 
-  const getStatusBadge = (status: string) => {
-    if (status === "connected" || status === "healthy" || status === "active" || status === "synced") {
+  const getStatusBadge = (status: unknown) => {
+    let statusStr = "";
+    if (status !== null && status !== undefined) {
+      if (typeof status === "object") {
+        try {
+          statusStr = JSON.stringify(status);
+        } catch {
+          statusStr = String(status);
+        }
+      } else {
+        statusStr = String(status);
+      }
+    }
+    const upperStatus = statusStr.toUpperCase();
+    const normalized = statusStr.toLowerCase();
+    
+    if (normalized === "connected" || normalized === "healthy" || normalized === "active" || normalized === "synced") {
       return (
         <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 flex items-center gap-1">
-          <CheckCircle2 size={10} /> {status.toUpperCase()}
+          <CheckCircle2 size={10} /> {upperStatus}
         </span>
       );
     }
     return (
       <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20 flex items-center gap-1 animate-pulse">
-        <AlertTriangle size={10} /> {status.toUpperCase()}
+        <AlertTriangle size={10} /> {upperStatus}
       </span>
     );
   };

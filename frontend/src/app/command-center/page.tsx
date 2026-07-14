@@ -165,8 +165,8 @@ export default function CommandCenterPage() {
 
   const filteredCommands = (commands || []).filter(
     (c) =>
-      c.command_type.toLowerCase().includes(search.toLowerCase()) ||
-      c.status.toLowerCase().includes(search.toLowerCase())
+      (c.command_type || "").toLowerCase().includes((search || "").toLowerCase()) ||
+      (c.status || "").toLowerCase().includes((search || "").toLowerCase())
   );
 
   return (
