@@ -26,6 +26,7 @@ import {
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/mission-control", label: "Mission Control", icon: BrainCircuit },
   { href: "/crowd", label: "Crowd", icon: Users2 },
   { href: "/incidents", label: "Incidents", icon: AlertOctagon },
   { href: "/volunteers", label: "Volunteers", icon: ShieldCheck },

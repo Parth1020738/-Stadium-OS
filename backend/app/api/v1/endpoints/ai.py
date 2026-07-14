@@ -333,3 +333,41 @@ async def ai_stream_endpoint(
     sse_gen = StreamingService.format_sse_stream(stream_gen)
     return StreamingResponse(sse_gen, media_type="text/event-stream")
 
+
+@router.post("/multi-agent/plan")
+async def generate_multi_agent_plan(
+    req: AICopilotRequest,
+    db: AsyncSession = Depends(get_db_session),
+    current_user: dict = Depends(get_current_user),
+    _role: None = Depends(read_checker)
+):
+    from backend.app.ai.context_builder import ContextBuilder
+    from backend.app.ai.agents.multi_agent_coordinator import MultiAgentCoordinator
+    
+    cb = ContextBuilder(db)
+    user_role = current_user.get("roles", ["Operator"])[0] if isinstance(current_user, dict) and current_user.get("roles") else "Operator"
+    context = await cb.build_context(operator_role=user_role)
+    
+    coordinator = MultiAgentCoordinator(db)
+    plan = await coordinator.generate_action_plan(req.query, context)
+    briefings = coordinator.generate_briefings(plan)
+    
+    return {
+        "plan": plan,
+        "briefings": briefings
+    }
+
+
+@router.get("/multi-agent/memory")
+async def get_multi_agent_memory(
+    current_user: dict = Depends(get_current_user),
+    _role: None = Depends(read_checker)
+):
+    from backend.app.ai.agents.agent_memory import global_agent_memory
+    return {
+        "past_decisions": global_agent_memory.past_decisions,
+        "past_simulations": global_agent_memory.past_simulations,
+        "operator_preferences": global_agent_memory.operator_preferences
+    }
+
+
