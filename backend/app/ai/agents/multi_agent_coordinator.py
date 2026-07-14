@@ -159,92 +159,115 @@ class MultiAgentCoordinator:
     def _compile_role_briefing(self, role: str, plan: Dict[str, Any]) -> Dict[str, Any]:
         agents = plan.get("agents", {})
         
+        # Pull details from corresponding agent if available, else use default values
+        agent_data = agents.get(role, {}) or agents.get("crowd", {})
+        
+        # Standard default fallbacks that are overwritten per role
+        current_situation = "Stadium operations are running at nominal flow. Ingress rate is balanced."
+        major_risks = "No major risks identified at this time."
+        current_incidents = "Zero active critical incidents."
+        ai_recommendations = ["Continue standard dashboard monitoring."]
+        expected_problems = "Possible egress transit surge."
+        resource_status = "Staffing and volunteers at 100% check-in rate."
+        priority_actions = ["Monitor gate turnstiles."]
+        confidence = plan.get("confidence", 0.95)
+        reasoning = "System telemetry reports regular traffic flow across all sectors."
+
         if role == "ceo":
-            status = "Green"
-            if plan.get("conflicts"):
-                status = "Amber"
-            return {
-                "role_title": "Chief Executive Officer",
-                "status": status,
-                "summary": "Stadium ingress operations are running. Handled 1 coordinate planning request with no major safety hazards.",
-                "predictions": "High egress flow expected post-match. Turnstile scanning speed remains stable.",
-                "risks": "Gate C potential corridor bottleneck (mitigated by safety open override).",
-                "recommended_actions": ["Approve operational timeline overrides for matchday exit flow."],
-                "confidence": plan.get("confidence", 0.95)
-            }
+            current_situation = "Stadium ingress operations are active for FIFA World Cup Matchday. Flow is stable."
+            major_risks = "Potential egress corridor bottleneck if Gate C is prematurely restricted."
+            current_incidents = "1 minor slip and fall, 1 elevator technical warning."
+            ai_recommendations = ["Approve Gate C safety override to maintain open status.", "Deploy additional stewards to elevator lobby."]
+            expected_problems = "Egress surge immediately following final whistle."
+            resource_status = "Volunteer stewards: 45 active, Security patrols: 15 active, Medical: 4 squads active."
+            priority_actions = ["Authorize gate rate overrides for matchday exit flow."]
+            reasoning = "Ensures ingress/egress safety metrics stay within the 6-minute threshold."
         elif role == "operations":
-            return {
-                "role_title": "Director of Operations",
-                "status": "Green",
-                "summary": "Matchday control center telemetry registers stable crowd flows.",
-                "predictions": "Queue times at Gate D predicted to rise slightly under high volume.",
-                "risks": "Minor shift overlap gaps for stewards.",
-                "recommended_actions": [t["action"] for t in plan.get("timeline", [])[:3]],
-                "confidence": plan.get("confidence", 0.92)
-            }
-        elif role == "volunteer":
-            vol_res = agents.get("volunteer", {})
-            return {
-                "role_title": "Volunteer Coordinator",
-                "status": "Green" if not vol_res.get("potential_risks") else "Amber",
-                "summary": vol_res.get("summary", "Volunteer allocation nominal."),
-                "predictions": "Roster compliance stable.",
-                "risks": vol_res.get("potential_risks", ["Steward overlap lag."]),
-                "recommended_actions": vol_res.get("recommended_actions", ["Monitor shift check-ins."]),
-                "confidence": vol_res.get("confidence", 0.90)
-            }
-        elif role == "transit":
-            transit_res = agents.get("transit", {})
-            return {
-                "role_title": "Transit Operations Lead",
-                "status": "Green" if not transit_res.get("potential_risks") else "Amber",
-                "summary": transit_res.get("summary", "Transit headways within threshold."),
-                "predictions": "Shuttle capacity meets demand.",
-                "risks": transit_res.get("potential_risks", ["Outer Ring Road delays."]),
-                "recommended_actions": transit_res.get("recommended_actions", ["Maintain current loop intervals."]),
-                "confidence": transit_res.get("confidence", 0.91)
-            }
+            current_situation = "Control center monitors stable crowd flows and optimal vehicle headways."
+            major_risks = "Queue congestion at Gate D bypass."
+            current_incidents = "Minor delay on outer ring shuttle route."
+            ai_recommendations = ["Increase Metro Shuttle frequency.", "Stagger turnstile scanning gates if density spikes."]
+            expected_problems = "Elevator mechanical failure near Gate C."
+            resource_status = "Shuttles active: 12, standby vehicles: 2."
+            priority_actions = ["Deploy Volunteer Team Bravo to assist Gate D flow."]
+            reasoning = "Ingress rates match ticket scanning capacities; no critical bottlenecks detected."
         elif role == "security":
             sec_res = agents.get("security", {})
-            return {
-                "role_title": "Security Commander",
-                "status": "Green",
-                "summary": sec_res.get("summary", "Gates and corridors fully secured."),
-                "predictions": "No perimeter breaches detected.",
-                "risks": sec_res.get("potential_risks", []),
-                "recommended_actions": sec_res.get("recommended_actions", ["Regular perimeter patrols."]),
-                "confidence": sec_res.get("confidence", 0.95)
-            }
+            current_situation = sec_res.get("summary", "Gates and corridors fully secured.")
+            major_risks = "Unapproved access points near Gate C outer perimeter."
+            current_incidents = sec_res.get("potential_risks", ["Steward allocation gap."])
+            ai_recommendations = sec_res.get("recommended_actions", ["Regular perimeter patrols."])
+            expected_problems = "Crowd surge near ticketing checkpoints."
+            resource_status = "Security Personnel: 45 guards on shift, 5 supervisors."
+            priority_actions = ["Increase security patrols at Gate C perimeter."]
+            confidence = sec_res.get("confidence", 0.95)
+            reasoning = sec_res.get("reasoning", "CCTV feed analytics show no unauthorized activity.")
+        elif role == "volunteer":
+            vol_res = agents.get("volunteer", {})
+            current_situation = vol_res.get("summary", "Volunteer allocation nominal.")
+            major_risks = "South Stand (Zone 5) steward check-in delay."
+            current_incidents = vol_res.get("potential_risks", ["Steward overlap lag."])
+            ai_recommendations = vol_res.get("recommended_actions", ["Deploy Team Bravo."])
+            expected_problems = "Shift transition delays."
+            resource_status = "Active stewards: 45, standby stewards: 10."
+            priority_actions = ["Trigger push notification to standby stewards."]
+            confidence = vol_res.get("confidence", 0.90)
+            reasoning = vol_res.get("reasoning", "Volunteer check-in records indicate 92% attendance.")
+        elif role == "transit":
+            transit_res = agents.get("transit", {})
+            current_situation = transit_res.get("summary", "Transit headways within threshold.")
+            major_risks = "Metro Shuttle junction delays due to traffic."
+            current_incidents = transit_res.get("potential_risks", ["Outer Ring Road delays."])
+            ai_recommendations = transit_res.get("recommended_actions", ["Deploy standby buses."])
+            expected_problems = "Passenger queue growth at station hub."
+            resource_status = "Buses running: 12, standby: 3."
+            priority_actions = ["Increase Metro Shuttle frequency by deploying standby buses."]
+            confidence = transit_res.get("confidence", 0.91)
+            reasoning = transit_res.get("reasoning", "GPS tracking shows traffic bottleneck at Outer Ring junction.")
         elif role == "medical":
             med_res = agents.get("medical", {})
-            return {
-                "role_title": "Chief Medical Officer",
-                "status": "Green",
-                "summary": med_res.get("summary", "First aid rooms ready on standby."),
-                "predictions": "Expected patient volume within nominal tolerances.",
-                "risks": med_res.get("potential_risks", []),
-                "recommended_actions": med_res.get("recommended_actions", ["Maintain medic standby sectors."]),
-                "confidence": med_res.get("confidence", 0.94)
-            }
+            current_situation = med_res.get("summary", "First aid rooms ready on standby.")
+            major_risks = "Heat exhaustion cases in South Stand."
+            current_incidents = med_res.get("potential_risks", [])
+            ai_recommendations = med_res.get("recommended_actions", ["Maintain medic standby sectors."])
+            expected_problems = "Dizziness incidents in unshaded rows."
+            resource_status = "Paramedics: 8, First Aid Rooms active: 4."
+            priority_actions = ["Dispatch First Aid Squad 4 to Sector B."]
+            confidence = med_res.get("confidence", 0.94)
+            reasoning = med_res.get("reasoning", "High ambient temperatures correlate with rising heat exhaustion logs.")
         elif role == "accessibility":
             acc_res = agents.get("accessibility", {})
-            return {
-                "role_title": "Accessibility Specialist",
-                "status": "Green" if not acc_res.get("potential_risks") else "Amber",
-                "summary": acc_res.get("summary", "All vertical lifts running."),
-                "predictions": "Ramps and elevators clear.",
-                "risks": acc_res.get("potential_risks", []),
-                "recommended_actions": acc_res.get("recommended_actions", []),
-                "confidence": acc_res.get("confidence", 0.98)
-            }
-        else:
+            current_situation = acc_res.get("summary", "All vertical lifts running.")
+            major_risks = "Ramp B wheelchair bottleneck."
+            current_incidents = acc_res.get("potential_risks", [])
+            ai_recommendations = acc_res.get("recommended_actions", ["Redirect wheelchair guests to Elevator 1."])
+            expected_problems = "Mechanical failure of elevator 2 near Gate C."
+            resource_status = "Elevators operational: 6/6, ramps clear: 100%."
+            priority_actions = ["Deploy 2 stewards to Gate C lift to assist manually."]
+            confidence = acc_res.get("confidence", 0.98)
+            reasoning = acc_res.get("reasoning", "Elevator E-204 telemetry indicates normal mechanical door function.")
+        elif role == "sustainability":
             sust_res = agents.get("sustainability", {})
-            return {
-                "role_title": "Sustainability Coordinator",
-                "status": "Green",
-                "summary": sust_res.get("summary", "Energy conservation measures online."),
-                "predictions": "Solar storage load optimal.",
-                "risks": sust_res.get("potential_risks", []),
-                "recommended_actions": sust_res.get("recommended_actions", []),
-                "confidence": sust_res.get("confidence", 0.92)
-            }
+            current_situation = sust_res.get("summary", "Energy conservation measures online.")
+            major_risks = "Halftime suit temperature peaks."
+            current_incidents = sust_res.get("potential_risks", [])
+            ai_recommendations = sust_res.get("recommended_actions", ["Approve halftime energy setbacks."])
+            expected_problems = "Solar generation drop due to rain/overcast."
+            resource_status = "Solar production: 420 kW, Waste diversion teams active."
+            priority_actions = ["Set HVAC target to 23C in VIP suites."]
+            confidence = sust_res.get("confidence", 0.92)
+            reasoning = sust_res.get("reasoning", "Smart HVAC setback maintains suit thermal comfort while reducing grid loads.")
+
+        return {
+            "role_title": role.upper() + " Executive Briefing",
+            "current_situation": current_situation,
+            "major_risks": major_risks,
+            "current_incidents": current_incidents,
+            "ai_recommendations": ai_recommendations,
+            "expected_problems": expected_problems,
+            "resource_status": resource_status,
+            "priority_actions": priority_actions,
+            "confidence": confidence,
+            "reasoning": reasoning
+        }
+

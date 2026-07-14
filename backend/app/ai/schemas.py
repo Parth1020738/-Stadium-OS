@@ -68,3 +68,14 @@ class AICopilotResponse(BaseModel):
     answer: str
     suggested_commands: List[str] = []
     tokens_used: int = 0
+    summary: Optional[str] = None
+    reasoning: Optional[str] = None
+    timeline: Optional[List[Dict[str, Any]]] = None
+    affected_areas: Optional[List[str]] = None
+    departments: Optional[List[str]] = None
+    commands: Optional[List[str]] = None
+    alternative_plans: Optional[List[str]] = None
+    risk: Optional[str] = None
+    confidence: Optional[float] = None
+    resources_needed: Optional[List[str]] = None
+    expected_outcome: Optional[str] = None

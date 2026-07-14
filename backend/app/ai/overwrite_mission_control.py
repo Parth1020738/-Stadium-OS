@@ -1,4 +1,6 @@
-"use client";
+import os
+
+content = """\"use client\";
 
 import React, { useState, useEffect } from "react";
 import { apiClient } from "@/lib/api-client";
@@ -643,3 +645,8 @@ export default function MissionControlPage() {
     </div>
   );
 }
+"""
+
+with open("frontend/src/app/mission-control/page.tsx", "w", encoding="utf-8") as f:
+    f.write(content)
+print("Successfully overwrote Mission Control page.tsx")

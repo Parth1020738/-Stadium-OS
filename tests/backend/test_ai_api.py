@@ -121,3 +121,25 @@ async def test_ai_rest_endpoints(auth_header):
         res = await client.post(f"/api/v1/ai/recommendations/{rec_id}/accept", headers=auth_header)
         assert res.status_code == 200
         assert res.json()["status"] == "Accepted"
+
+        # GET matchday mode
+        res = await client.get("/api/v1/ai/matchday/mode", headers=auth_header)
+        assert res.status_code == 200
+        assert "mode" in res.json()
+
+        # POST matchday mode
+        res = await client.post("/api/v1/ai/matchday/mode?mode=Halftime", headers=auth_header)
+        assert res.status_code == 200
+        assert res.json()["mode"] == "Halftime"
+
+        # POST demo trigger
+        res = await client.post("/api/v1/ai/demo/trigger?scenario=crowd_surge", headers=auth_header)
+        assert res.status_code == 200
+        assert res.json()["scenario"] == "crowd_surge"
+
+        # POST copilot detailed
+        res = await client.post("/api/v1/ai/copilot", json={"query": "Why is Gate A congested?"}, headers=auth_header)
+        assert res.status_code == 200
+        assert "summary" in res.json()
+        assert "risk" in res.json()
+

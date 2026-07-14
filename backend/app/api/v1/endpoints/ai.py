@@ -371,3 +371,48 @@ async def get_multi_agent_memory(
     }
 
 
+@router.get("/matchday/mode")
+async def get_matchday_mode(
+    current_user: dict = Depends(get_current_user),
+    _role: None = Depends(read_checker)
+):
+    from backend.app.services.matchday_intelligence import MatchdayModeService
+    return {
+        "mode": MatchdayModeService.get_current_mode(),
+        "config": MatchdayModeService.get_mode_configurations()
+    }
+
+
+@router.post("/matchday/mode")
+async def set_matchday_mode(
+    mode: str = Query(..., description="Matchday Mode to switch to"),
+    current_user: dict = Depends(get_current_user),
+    _role: None = Depends(write_checker)
+):
+    from backend.app.services.matchday_intelligence import MatchdayModeService
+    try:
+        MatchdayModeService.set_mode(mode)
+        return {
+            "status": "SUCCESS",
+            "message": f"Successfully shifted matchday mode to {mode}",
+            "mode": mode,
+            "config": MatchdayModeService.get_mode_configurations()
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.post("/demo/trigger")
+async def trigger_demo_scenario(
+    scenario: str = Query(..., description="Demo scenario name"),
+    db: AsyncSession = Depends(get_db_session),
+    current_user: dict = Depends(get_current_user),
+    _role: None = Depends(write_checker)
+):
+    from backend.app.services.demo_mode_service import DemoModeService
+    service = DemoModeService(db)
+    result = await service.trigger_scenario(scenario)
+    return result
+
+
+
