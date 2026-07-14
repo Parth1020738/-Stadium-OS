@@ -2,7 +2,7 @@ import jwt
 import uuid
 from datetime import datetime, timedelta, timezone
 from argon2 import PasswordHasher
-from argon2.exceptions import VerifyMismatchError
+from argon2.exceptions import VerifyMismatchError, InvalidHashError
 from backend.app.core.config import settings
 
 ph = PasswordHasher()
@@ -11,10 +11,19 @@ def hash_password(password: str) -> str:
     return ph.hash(password)
 
 def verify_password(hashed_password: str, password: str) -> bool:
+    """Verify an Argon2 password.
+
+    Must NEVER raise for invalid/corrupted hashes; callers expect a clean "False"
+    so auth endpoints can return 401 instead of 500.
+    """
     try:
         return ph.verify(hashed_password, password)
-    except VerifyMismatchError:
+    except (VerifyMismatchError, InvalidHashError):
         return False
+    except Exception:
+        # Defensive: argon2 can raise other parsing/format errors depending on version.
+        return False
+
 
 def create_access_token(subject: str, roles: list[str]) -> str:
     now_time = datetime.now(timezone.utc)

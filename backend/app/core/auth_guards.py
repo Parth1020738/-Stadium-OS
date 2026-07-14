@@ -3,14 +3,19 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from backend.app.core.security import verify_jwt_token
 from backend.app.core.redis import redis_manager
 
-security = HTTPBearer()
+security = HTTPBearer(auto_error=False)
 
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> dict:
+    if credentials is None:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Missing token"
+        )
     token = credentials.credentials
     payload = verify_jwt_token(token)
     if not payload:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
+            status_code=status.HTTP_403_FORBIDDEN,
             detail="Invalid signature or expired token"
         )
     
