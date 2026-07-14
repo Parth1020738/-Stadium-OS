@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { apiClient } from "@/lib/api-client";
-import { Users, UserCheck, UserX, Shield, RefreshCw } from "lucide-react";
+import { Users, Shield, RefreshCw } from "lucide-react";
 
 interface UserProfile {
   first_name: string;
@@ -30,7 +30,7 @@ export default function UsersPage() {
   const { user: currentUser } = useAuthStore();
   const [users, setUsers] = useState<UserData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [, setErrorMsg] = useState<string | null>(null);
 
   const fetchUsers = async () => {
     setIsLoading(true);
@@ -38,8 +38,9 @@ export default function UsersPage() {
     try {
       const response = await apiClient.get("/users/");
       setUsers(response.data || []);
-    } catch (err: any) {
-      console.warn("Failed fetching backend users, using fallback mock users.", err);
+    } catch (err) {
+      const error = err as Error;
+      console.warn("Failed fetching backend users, using fallback mock users.", error);
       // Fallback Mock Users
       const mockUsers: UserData[] = [
         {
@@ -82,6 +83,8 @@ export default function UsersPage() {
   };
 
   useEffect(() => {
+    // Initialization fetch — safe setState pattern
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchUsers();
   }, []);
 
@@ -92,8 +95,9 @@ export default function UsersPage() {
     try {
       await apiClient.post(`/users/${userToUpdate.id}/${action}`);
       setUsers(prev => prev.map(u => u.id === userToUpdate.id ? { ...u, status: nextStatus } : u));
-    } catch (err: any) {
-      console.warn(`Failed backend status toggle for user ${userToUpdate.id}, simulating locally.`, err);
+    } catch (err) {
+      const error = err as Error;
+      console.warn(`Failed backend status toggle for user ${userToUpdate.id}, simulating locally.`, error);
       setUsers(prev => prev.map(u => u.id === userToUpdate.id ? { ...u, status: nextStatus } : u));
     }
   };
@@ -102,8 +106,9 @@ export default function UsersPage() {
     try {
       await apiClient.post(`/users/${userToUpdate.id}/roles`, { role_name: roleName });
       setUsers(prev => prev.map(u => u.id === userToUpdate.id ? { ...u, roles: Array.from(new Set([...u.roles, roleName])) } : u));
-    } catch (err: any) {
-      console.warn(`Failed backend role assign for user ${userToUpdate.id}, simulating locally.`, err);
+    } catch (err) {
+      const error = err as Error;
+      console.warn(`Failed backend role assign for user ${userToUpdate.id}, simulating locally.`, error);
       setUsers(prev => prev.map(u => u.id === userToUpdate.id ? { ...u, roles: Array.from(new Set([...u.roles, roleName])) } : u));
     }
   };
@@ -112,8 +117,9 @@ export default function UsersPage() {
     try {
       await apiClient.delete(`/users/${userToUpdate.id}/roles`, { data: { role_name: roleName } });
       setUsers(prev => prev.map(u => u.id === userToUpdate.id ? { ...u, roles: u.roles.filter(r => r !== roleName) } : u));
-    } catch (err: any) {
-      console.warn(`Failed backend role removal for user ${userToUpdate.id}, simulating locally.`, err);
+    } catch (err) {
+      const error = err as Error;
+      console.warn(`Failed backend role removal for user ${userToUpdate.id}, simulating locally.`, error);
       setUsers(prev => prev.map(u => u.id === userToUpdate.id ? { ...u, roles: u.roles.filter(r => r !== roleName) } : u));
     }
   };

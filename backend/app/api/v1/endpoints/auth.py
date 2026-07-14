@@ -61,7 +61,7 @@ async def login(req: LoginRequest, db: AsyncSession = Depends(get_db_session)):
     stmt = select(User).where(User.email == req.email).options(selectinload(User.roles))
     res = await db.execute(stmt)
     user = res.scalar_one_or_none()
-    if not user or not verify_password(user.hashed_password, req.password):
+    if not user or not verify_password(req.password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid email or password")
         
     roles = [r.name for r in user.roles]

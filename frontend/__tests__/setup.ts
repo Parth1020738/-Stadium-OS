@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
 
-// Mock localStorage globally for JSDOM and Node environment overrides
 const localStorageStore: Record<string, string> = {};
 const localStorageMock = {
   getItem: vi.fn((key: string) => localStorageStore[key] || null),
@@ -28,7 +26,6 @@ if (typeof window !== "undefined") {
   });
 }
 
-// Mock global BroadcastChannel for tests
 if (typeof window !== "undefined" && !window.BroadcastChannel) {
   (window as any).BroadcastChannel = class {
     name: string;

@@ -35,7 +35,7 @@ export default function HealthPage() {
     try {
       const response = await apiClient.get("/health");
       setHealth(response.data);
-    } catch (err: any) {
+    } catch (err) {
       console.warn("Failed fetching backend health, using mock fallback dashboard stats.", err);
       // Fallback Mock Health Check
       const mockHealth: HealthData = {
@@ -65,9 +65,12 @@ export default function HealthPage() {
   };
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    // Initialization fetch — safe setState pattern
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchHealth();
 
-    let intervalId: any;
+    let intervalId: ReturnType<typeof setInterval> | undefined;
     if (autoRefresh) {
       intervalId = setInterval(() => {
         fetchHealth();

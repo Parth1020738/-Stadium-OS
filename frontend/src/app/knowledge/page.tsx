@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { apiClient } from "@/lib/api-client";
-import { BookOpen, Search, Plus, FileText, Calendar, User, Tag, RefreshCw, X, AlertCircle } from "lucide-react";
+import { BookOpen, Search, Plus, FileText, Calendar, User, RefreshCw, X } from "lucide-react";
 
 interface Document {
   id: number;
@@ -19,7 +19,7 @@ export default function KnowledgePage() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [, setErrorMsg] = useState<string | null>(null);
 
   // New document form state
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -39,8 +39,9 @@ export default function KnowledgePage() {
         response = await apiClient.get("/documents/");
         setDocuments(response.data || []);
       }
-    } catch (err: any) {
-      console.warn("Failed fetching backend documents, using fallback mock data.", err);
+    } catch (err) {
+      const error = err as Error;
+      console.warn("Failed fetching backend documents, using fallback mock data.", error);
       // Fallback Mock Data
       const mockDocs: Document[] = [
         {
@@ -75,6 +76,8 @@ export default function KnowledgePage() {
   };
 
   useEffect(() => {
+    // Initialization fetch — safe setState pattern
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchDocuments();
   }, []);
 
@@ -101,8 +104,9 @@ export default function KnowledgePage() {
       setShowCreateModal(false);
       setNewTitle("");
       setNewContent("");
-    } catch (err: any) {
-      console.warn("Failed creating backend document, updating local state mock style.", err);
+    } catch (err) {
+      const error = err as Error;
+      console.warn("Failed creating backend document, updating local state mock style.", error);
       const mockNewDoc: Document = {
         id: Date.now(),
         title: newTitle,
