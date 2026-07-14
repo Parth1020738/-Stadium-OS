@@ -215,7 +215,12 @@ class SafeRedisClient:
 
 class RedisManager:
     def __init__(self):
-        client = aioredis.from_url(settings.REDIS_URL, decode_responses=False) # Keep original bytes/string decoding control
+        client = aioredis.from_url(
+            settings.REDIS_URL, 
+            decode_responses=False,
+            socket_connect_timeout=0.1,
+            socket_timeout=0.1
+        ) # Keep original bytes/string decoding control
         self.client = SafeRedisClient(client)
 
     async def ping(self) -> bool:

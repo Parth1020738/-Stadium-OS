@@ -15,11 +15,36 @@ async def setup_knowledge_tables():
     from tests.backend.test_auth import test_engine
     # Ensure user_domain and knowledge models are imported to register tables
     import backend.app.models.user_domain
-    import backend.app.models.knowledge
+    from backend.app.models.knowledge import (
+        KnowledgeDocument,
+        KnowledgeCategory,
+        KnowledgeTag,
+        AuditLog,
+        KnowledgeVersion,
+        KnowledgeAttachment
+    )
+    print("BEFORE CREATE_ALL metadata keys:", list(Base.metadata.tables.keys()))
     async with test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
+        
+        # Verify tables in the database file itself
+        def get_db_tables(connection):
+            import sqlite3
+            cursor = connection.connection.cursor()
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+            res = cursor.fetchall()
+            return [r[0] for r in res]
+        db_tables = await conn.run_sync(get_db_tables)
+        print("AFTER CREATE_ALL database tables:", db_tables)
+    
+    # Register dependency override for knowledge test module
+    from backend.app.core.dependencies import get_db_session
+    from tests.backend.test_auth import override_get_db_session
+    app.dependency_overrides[get_db_session] = override_get_db_session
     yield
+    app.dependency_overrides.pop(get_db_session, None)
+    await test_engine.dispose()
 
 @pytest.mark.asyncio
 async def test_knowledge_complete_flow():

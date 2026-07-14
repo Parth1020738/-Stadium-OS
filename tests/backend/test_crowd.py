@@ -16,7 +16,15 @@ async def setup_crowd_tables():
     async with test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
+    
+    # Register dependency override for crowd test module
+    from backend.app.core.dependencies import get_db_session
+    from tests.backend.test_auth import override_get_db_session
+    app.dependency_overrides[get_db_session] = override_get_db_session
     yield
+    app.dependency_overrides.pop(get_db_session, None)
+    from tests.backend.test_auth import test_engine
+    await test_engine.dispose()
 
 
 @pytest.mark.asyncio

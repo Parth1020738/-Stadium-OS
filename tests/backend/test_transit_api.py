@@ -10,7 +10,7 @@ from backend.app.models.transit import TransitRoute, TransitStop, TransitVehicle
 
 import asyncio
 
-test_db_url = "sqlite+aiosqlite:///./test_transit_api.db"
+test_db_url = "sqlite+aiosqlite:///" + os.path.abspath("./test_transit_api.db").replace("\\", "/")
 
 @pytest.fixture(scope="module", autouse=True)
 async def setup_api_db():
@@ -25,6 +25,7 @@ async def setup_api_db():
     api_test_session = async_sessionmaker(api_test_engine, class_=AsyncSession, expire_on_commit=False)
     
     async with api_test_engine.begin() as conn:
+        import backend.app.models.transit
         print("METADATA TABLES IN TEST:", list(Base.metadata.tables.keys()))
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
@@ -60,6 +61,7 @@ async def setup_api_db():
 
     async with api_test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
+    await api_test_engine.dispose()
     if os.path.exists("./test_transit_api.db"):
         try:
             os.remove("./test_transit_api.db")

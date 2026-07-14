@@ -6,10 +6,18 @@ from datetime import datetime, timezone, timedelta
 from httpx import AsyncClient, ASGITransport
 from backend.app.main import app
 from backend.app.models.auth import Base, User
-from backend.app.models.accessibility import AccessibilityFacility, AccessibilityMap, AccessibilityBarrier
+from backend.app.models.accessibility import (
+    AccessibilityFacility, 
+    AccessibilityMap, 
+    AccessibilityBarrier,
+    AccessibilityRoute,
+    AccessibilityWaypoint,
+    AccessibilityAlert,
+    AccessibilityAudit
+)
 from backend.app.core.security import settings
 
-test_db_url = "sqlite+aiosqlite:///./test_accessibility_api.db"
+test_db_url = "sqlite+aiosqlite:///" + os.path.abspath("./test_accessibility_api.db").replace("\\", "/")
 
 @pytest.fixture(scope="module", autouse=True)
 async def setup_api_db():
@@ -23,6 +31,9 @@ async def setup_api_db():
     
     async with api_test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
+        # Force registration of all models
+        import backend.app.models.accessibility
+        print("Accessibility tables:", list(Base.metadata.tables.keys()))
         await conn.run_sync(Base.metadata.create_all)
         
     async with AsyncSession(api_test_engine) as session:
@@ -59,6 +70,8 @@ async def setup_api_db():
 
     async with api_test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
+    
+    await api_test_engine.dispose()
     if os.path.exists("./test_accessibility_api.db"):
         try:
             os.remove("./test_accessibility_api.db")
@@ -145,6 +158,7 @@ async def test_accessibility_api_rbac_and_flow():
 
 @pytest.mark.asyncio
 async def test_accessibility_pagination_and_timezone():
+    print("Overrides in pagination test:", app.dependency_overrides)
     secret = settings.JWT_SECRET
     alg = "HS256"
 

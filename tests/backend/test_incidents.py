@@ -21,14 +21,20 @@ from backend.app.models.incident import (
 )
 from backend.app.core.kafka_producer import KafkaProducerClient
 
+import os
 # Test database setup
-TEST_DATABASE_URL = "sqlite+aiosqlite:///./test_incidents.db"
+TEST_DATABASE_URL = "sqlite+aiosqlite:///" + os.path.abspath("./test_incidents.db").replace("\\", "/")
 engine = create_async_engine(TEST_DATABASE_URL, echo=False, connect_args={"timeout": 5})
 async_test_session = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 # Create tables
 from backend.app.models.auth import Base
 from backend.app.models.incident import Base as IncidentBase
+
+@pytest.fixture(scope="module", autouse=True)
+async def cleanup_engine():
+    yield
+    await engine.dispose()
 
 @pytest_asyncio.fixture
 async def db_session():
@@ -50,6 +56,7 @@ async def db_session():
     async with engine.begin() as conn:
         await conn.run_sync(IncidentBase.metadata.drop_all)
         await conn.run_sync(Base.metadata.drop_all)
+    await engine.dispose()
 
 @pytest_asyncio.fixture
 async def client(db_session, mock_kafka_producer):

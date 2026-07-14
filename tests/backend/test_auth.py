@@ -19,6 +19,7 @@ from backend.app.models.user_domain import UserProfile, UserPreferences, Organiz
 # Setup Async Database engine for integration testing
 test_engine = create_async_engine(test_db_url, echo=False)
 test_session = async_sessionmaker(test_engine, class_=AsyncSession, expire_on_commit=False)
+test_session.__test__ = False
 
 @pytest.fixture(scope="session", autouse=True)
 def anyio_backend():
@@ -39,6 +40,7 @@ async def setup_test_db():
     yield
     async with test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
+    await test_engine.dispose()
 
 async def override_get_db_session():
     async with test_session() as session:

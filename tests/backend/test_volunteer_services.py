@@ -19,7 +19,7 @@ from backend.app.services.volunteer_service import (
     AttendanceService, LocationService, AuditService
 )
 
-test_db_url = "sqlite+aiosqlite:///./test_volunteer_services.db"
+test_db_url = "sqlite+aiosqlite:///" + os.path.abspath("./test_volunteer_services.db").replace("\\", "/")
 test_engine = create_async_engine(test_db_url, echo=False)
 test_session_maker = async_sessionmaker(test_engine, class_=AsyncSession, expire_on_commit=False)
 
@@ -31,6 +31,7 @@ async def setup_db():
     yield
     async with test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
+    await test_engine.dispose()
     if os.path.exists("./test_volunteer_services.db"):
         try:
             os.remove("./test_volunteer_services.db")

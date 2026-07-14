@@ -4,7 +4,23 @@ from backend.app.main import app
 from backend.app.core.security import create_access_token
 from backend.app.models.auth import Base, Role
 from backend.app.models.user_domain import UserProfile, UserPreferences, Organization, Department, Team
-from tests.backend.test_auth import test_session, setup_test_db
+from tests.backend.test_auth import test_session, test_engine
+
+@pytest.fixture(scope="module", autouse=True)
+async def setup_users_tables():
+    import backend.app.models.user_domain
+    import backend.app.models.auth
+    print("Base.metadata.tables.keys():", list(Base.metadata.tables.keys()))
+    async with test_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
+    
+    # Register dependency override for users test module
+    from backend.app.core.dependencies import get_db_session
+    from tests.backend.test_auth import override_get_db_session
+    app.dependency_overrides[get_db_session] = override_get_db_session
+    yield
+    app.dependency_overrides.pop(get_db_session, None)
 
 @pytest.mark.asyncio
 async def test_create_get_and_update_user_lifecycle():

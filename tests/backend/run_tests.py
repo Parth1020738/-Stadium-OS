@@ -74,12 +74,18 @@ def clean_dbs():
         "test_dashboard_service.db",
         "test_dashboard_timeline.db",
     ]
+    import time
     for db in db_files:
         if os.path.exists(db):
-            try:
-                os.remove(db)
-            except Exception as e:
-                print(f"Warning: could not delete {db}: {e}")
+            for i in range(5):
+                try:
+                    os.remove(db)
+                    break
+                except Exception as e:
+                    if i == 4:
+                        print(f"Warning: could not delete {db}: {e}")
+                    else:
+                        time.sleep(0.1)
 
 def main():
     print("Starting clean sequential backend test run...")
@@ -92,7 +98,7 @@ def main():
         clean_dbs()
         
         # Run pytest as a subprocess
-        result = subprocess.run([".venv\\Scripts\\pytest", test_file], capture_output=False)
+        result = subprocess.run([".venv\\Scripts\\pytest", "-s", test_file], capture_output=False)
         if result.returncode != 0:
             print(f"FAILED: {test_file}")
             all_passed = False

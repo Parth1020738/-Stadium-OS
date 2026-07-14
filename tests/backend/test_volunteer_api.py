@@ -6,7 +6,7 @@ from backend.app.main import app
 from backend.app.models.auth import Base, User
 from backend.app.core.security import create_access_token
 
-test_db_url = "sqlite+aiosqlite:///./test_volunteer_api.db"
+test_db_url = "sqlite+aiosqlite:///" + os.path.abspath("./test_volunteer_api.db").replace("\\", "/")
 
 @pytest.fixture(scope="module", autouse=True)
 async def setup_api_db():
@@ -52,6 +52,7 @@ async def setup_api_db():
 
     async with api_test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
+    await api_test_engine.dispose()
     if os.path.exists("./test_volunteer_api.db"):
         try:
             os.remove("./test_volunteer_api.db")
