@@ -69,10 +69,15 @@ Aegis OS uses a decoupled, event-driven service-oriented architecture:
 - **Database Engine**: SQLite (default local) or PostgreSQL with `pgvector` for vector embedding matching.
 - **Caching**: Redis for session invalidation and telemetry metadata store.
 
-### 🧠 AI Engine
-- **LLM Integrations**: Google Gemini API integration (`gemini-1.5-flash`).
-- **Playbook Suggestions**: RAG (Retrieval-Augmented Generation) engine utilizing local semantic similarity matching of SOP logs.
-- **Mock AI Mode**: Standardized fail-safe mock fallback modes to guarantee operation during offline/sandbox execution.
+### 🧠 GenAI Integration
+- **LLM Model**: Google Gemini 2.5 Flash (gemini-1.5-flash)
+- **AI Features**:
+  - Real-time streaming responses
+  - Multi-language translation (EN, ES, FR, PT, AR)
+  - Explainable recommendations with confidence scores
+  - Workflow step execution with approval
+  - Context-aware suggestions
+- **Mock AI Mode**: Production-ready fallback for demo/offline scenarios
 
 ### 🛡️ Command Center & Security Guards
 - **Multi-Operator Approvals**: Dual-signature confirmation gates for critical operations (e.g., dispatching emergency services, structural lockdowns).
@@ -245,14 +250,54 @@ Multi-operator confirmation paths protect stadium zones, dispatch units, and man
 
 ---
 
-## 9. Future Scope
+## 10. Judge Demo Guide
+
+### FIFA Demo Walkthrough
+1. **Login** → Use demo credentials: `operator@stadium.aegis.com` / `password123`
+2. **Dashboard** → View live crowd telemetry and system status
+3. **Click START FIFA DEMO** → Automatic simulation begins
+4. **Observe** → Mission Control updates through 9 match scenarios
+5. **Open Copilot** → Ask any operational question
+6. **Approve Commands** → Two-person auth flow demonstrated
+
+### Demo Scenarios
+| # | Scenario | Risk Level | Key Actions |
+|---|----------|-----------|-------------|
+| 1 | Pre-Match | Low | Gate operations |
+| 2 | Kickoff | Medium | Crowd monitoring |
+| 3 | Goal | Medium | Vibration analysis |
+| 4 | Halftime | Medium | Concourse flow |
+| 5 | Crowd Surge | High | Gate D bottleneck |
+| 6 | Medical Emergency | High | First aid dispatch |
+| 7 | Power Failure | High | Elevator failure |
+| 8 | Security Alert | Critical | Lockdown procedures |
+| 9 | Evacuation | Critical | Emergency protocols |
+
+---
+
+## 11. Technology Stack
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| Frontend | Next.js 16 | React framework with App Router |
+| UI | TailwindCSS 4 | Styling and responsive design |
+| State | Zustand 5 | Lightweight global state |
+| HTTP | Axios | REST API client |
+| Backend | FastAPI | Async Python web framework |
+| Database | SQLite | Local development DB |
+| Cache | Redis | Session and metadata cache |
+| Events | Kafka | Event streaming (optional) |
+| AI | Gemini 2.5 Flash | LLM integration |
+
+---
+
+## 12. Future Scope
 - **Edge Camera Integration**: Deploy physical RTSP pipelines and run low-latency YOLO models for real-time occupant estimation.
 - **Offline Mesh Networks**: Support Bluetooth Low Energy (BLE) fallback beacons for emergency dispatches when stadium cell networks crash.
 - **Dynamic Evacuation Optimization**: Implement path-finding algorithms to dynamically redirect crowd traffic away from hazard zones.
 
 ---
 
-## 10. License & Authors
-- **License**: MIT License
+## 13. License & Authors
+- **License**: MIT License  
 - **Author**: Parth Patel (Parth1020738)
-- **Repository**: [https://github.com/Parth1020738/-Stadium-OS](https://github.com/Parth1020738/-Stadium-OS)
