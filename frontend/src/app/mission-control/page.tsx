@@ -1,54 +1,20 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { apiClient } from "@/lib/api-client";
 import {
   Brain,
-  Shield,
   Activity,
   AlertTriangle,
-  Bus,
   Users,
-  Accessibility,
-  CloudRain,
   Zap,
   Terminal,
   Clock,
-  ArrowRight,
   CheckCircle,
-  XCircle,
-  Play,
-  RotateCcw,
-  Languages,
-  ActivityIcon,
-  HelpCircle,
-  Check,
-  TrendingUp,
-  Flame,
   Globe,
-  Settings,
   Sparkles,
   Info
 } from "lucide-react";
 
-interface AgentResult {
-  name: string;
-  summary: string;
-  reasoning: string;
-  confidence: number;
-  recommended_actions: string[];
-  alternative_actions?: string[];
-  potential_risks?: string[];
-  expected_impact?: string;
-}
-
-interface ConflictDetail {
-  agent_a: string;
-  recommendation_a: string;
-  agent_b: string;
-  recommendation_b: string;
-  resolution: string;
-}
 
 interface TimelineItem {
   time: string;
@@ -57,21 +23,43 @@ interface TimelineItem {
   status: "completed" | "pending" | "alert";
 }
 
-interface PlanResult {
-  query: string;
-  agents: Record<string, AgentResult>;
-  collaboration_logs: string[];
-  conflicts: ConflictDetail[];
+interface ScenarioTelemetry {
+  matchStatus: string;
+  attendance: number;
+  crowdHeat: string;
+  securityStatus: string;
+  medicalStatus: string;
+  transitStatus: string;
+  volunteerReadiness: number;
+  accessibilityReadiness: number;
+  sustainabilityScore: number;
+  energyConsumption: number;
+  carbonSavings: number;
+  weather: string;
+  predictedIncidents: string;
+  riskScore: number;
+  healthScore: number;
+  objectives: string[];
+  brief: string;
   timeline: TimelineItem[];
-  resource_optimizations: Record<string, string>;
-  confidence: number;
-  latency_ms: number;
+  recommendations: Array<{
+    title: string;
+    why: string;
+    evidence: string;
+    confidence: number;
+    alternatives: string;
+    risks: string;
+    expectedImprovement: string;
+    depts: string[];
+    time: string;
+    requiresApproval: boolean;
+  }>;
+  buses: Array<{ id: number; x: number; y: number; status: string; label: string }>;
+  volunteers: Array<{ id: number; name: string; x: number; y: number; status: string }>;
+  crowdPoints: Array<{ x: number; y: number; density: number }>;
+  gateState: string;
 }
 
-interface MatchdayModeConfig {
-  ai_priority?: string;
-  expected_flow?: string;
-}
 
 // Scenarios configuration with matching telemetry & AI briefs
 const MATCH_SCENARIOS = {
@@ -638,12 +626,13 @@ export default function MissionControlPage() {
   const demoIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const scenarioNames = useMemo(() => Object.keys(MATCH_SCENARIOS), []);
 
-  const scenarioData = (MATCH_SCENARIOS as Record<string, any>)[activeScenarioName] || MATCH_SCENARIOS["Pre-Match"];
+  const scenarioData = (MATCH_SCENARIOS as Record<string, ScenarioTelemetry>)[activeScenarioName] || MATCH_SCENARIOS["Pre-Match"];
 
   // Fluctuate telemetry values dynamically to show "live digital twin"
-  const [liveTelemetry, setLiveTelemetry] = useState(scenarioData);
+  const [liveTelemetry, setLiveTelemetry] = useState<ScenarioTelemetry>(scenarioData);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLiveTelemetry(scenarioData);
   }, [activeScenarioName, scenarioData]);
 
@@ -651,14 +640,14 @@ export default function MissionControlPage() {
   useEffect(() => {
     const timer = setInterval(() => {
       setSyncStatus("SYNCING");
-      setLiveTelemetry((prev: any) => {
+      setLiveTelemetry((prev: ScenarioTelemetry) => {
         const attendanceOffset = Math.floor(Math.random() * 20) - 10;
         const energyOffset = Math.floor(Math.random() * 6) - 3;
         const riskOffset = parseFloat((Math.random() * 2 - 1).toFixed(1));
         const newRisk = Math.min(100, Math.max(5, prev.riskScore + riskOffset));
         
         // Randomly update digital twin vehicle positions
-        const nextBuses = prev.buses.map((bus: any) => {
+        const nextBuses = prev.buses.map((bus) => {
           if (bus.status === "moving") {
             const nextX = bus.x >= 450 ? 50 : bus.x + Math.floor(Math.random() * 15) + 5;
             return { ...bus, x: nextX };
@@ -667,7 +656,7 @@ export default function MissionControlPage() {
         });
 
         // Randomly nudge volunteer stewards coordinates
-        const nextVolunteers = prev.volunteers.map((v: any) => ({
+        const nextVolunteers = prev.volunteers.map((v) => ({
           ...v,
           x: v.x + (Math.floor(Math.random() * 6) - 3),
           y: v.y + (Math.floor(Math.random() * 6) - 3)
@@ -908,7 +897,7 @@ export default function MissionControlPage() {
               <circle cx="250" cy="150" r="15" className="stroke-emerald-600/60" strokeWidth="2" fill="none" />
 
               {/* Dynamic Crowd Heat points */}
-              {liveTelemetry.crowdPoints.map((pt: any, idx: number) => (
+              {liveTelemetry.crowdPoints.map((pt, idx: number) => (
                 <circle
                   key={idx}
                   cx={pt.x}
@@ -920,7 +909,7 @@ export default function MissionControlPage() {
               ))}
 
               {/* Active Shuttle Bus movement representation */}
-              {liveTelemetry.buses.map((bus: any) => (
+              {liveTelemetry.buses.map((bus) => (
                 <g key={bus.id} transform={`translate(${bus.x}, ${bus.y})`} className="transition-all duration-1000">
                   <rect x="-8" y="-6" width="16" height="12" rx="2" className="fill-yellow-500 stroke-zinc-950" strokeWidth="1.5" />
                   <circle cx="-5" cy="8" r="2.5" className="fill-zinc-800" />
@@ -930,7 +919,7 @@ export default function MissionControlPage() {
               ))}
 
               {/* Active Volunteer location markers */}
-              {liveTelemetry.volunteers.map((v: any) => (
+              {liveTelemetry.volunteers.map((v) => (
                 <g key={v.id} transform={`translate(${v.x}, ${v.y})`}>
                   <circle cx="0" cy="0" r="5" className="fill-indigo-500 stroke-white" strokeWidth="1" />
                   <text x="-3" y="11" className="fill-zinc-400 font-mono text-[7px]">{v.name}</text>
@@ -997,7 +986,7 @@ export default function MissionControlPage() {
                 <span>AUTO-REFRESH: ACTIVE</span>
               </div>
               <p className="text-zinc-200 italic font-semibold">
-                "{liveTelemetry.brief}"
+                &quot;{liveTelemetry.brief}&quot;
               </p>
             </div>
 
@@ -1051,7 +1040,7 @@ export default function MissionControlPage() {
             </div>
 
             <div className="space-y-4">
-              {liveTelemetry.recommendations.map((rec: any, idx: number) => (
+              {liveTelemetry.recommendations.map((rec, idx: number) => (
                 <div key={idx} className="bg-zinc-950/80 border border-zinc-850 p-5 rounded-lg space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-900 pb-3">
                     <div>
@@ -1200,7 +1189,7 @@ export default function MissionControlPage() {
             </h2>
             
             <div className="relative pl-6 border-l border-zinc-800 space-y-5 py-2">
-              {liveTelemetry.timeline.map((item: any, idx: number) => (
+              {liveTelemetry.timeline.map((item, idx: number) => (
                 <div key={idx} className="relative flex flex-col gap-1 text-xs">
                   {/* Timeline dot */}
                   <span className={`absolute -left-[30px] top-1 h-3.5 w-3.5 rounded-full border-2 border-zinc-950 ${

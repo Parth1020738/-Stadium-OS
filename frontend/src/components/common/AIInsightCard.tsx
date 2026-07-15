@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Brain, Sparkles, AlertTriangle, CheckCircle, ArrowRight, Globe, Shield, RefreshCw } from "lucide-react";
+import { Brain, Sparkles, CheckCircle, ArrowRight, Globe, RefreshCw } from "lucide-react";
 import { apiClient } from "@/lib/api-client";
 
 interface AIInsightCardProps {
   page: "crowd" | "incident" | "transit" | "volunteer" | "accessibility" | "mission-control" | "command-center";
-  extraData?: any;
+  extraData?: Record<string, unknown>;
   onExecuteCommand?: (command: string) => void;
 }
 
@@ -211,17 +211,30 @@ const translations: Record<string, Record<string, string>> = {
   }
 };
 
-export default function AIInsightCard({ page, extraData, onExecuteCommand }: AIInsightCardProps) {
+export default function AIInsightCard({ page, onExecuteCommand }: AIInsightCardProps) {
   const [lang, setLang] = useState<string>("en");
   const [loadingTranslation, setLoadingTranslation] = useState<boolean>(false);
-  const [translatedData, setTranslatedData] = useState<any>(null);
+  const [translatedData, setTranslatedData] = useState<{
+    summary: string;
+    risk: string;
+    prediction: string;
+    recommendation: string;
+    confidence?: number;
+    why: string;
+    expectedImpact: string;
+    suggestedCommand?: string;
+    reasoningSteps: string[];
+  } | null>(null);
   const [generatedTime, setGeneratedTime] = useState<string>("");
 
   const baseInsight = localInsights[page] || localInsights.crowd;
 
   useEffect(() => {
-    setGeneratedTime(new Date().toLocaleTimeString());
-    setTranslatedData(null);
+    const timer = setTimeout(() => {
+      setGeneratedTime(new Date().toLocaleTimeString());
+      setTranslatedData(null);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [page]);
 
   const translateText = async (text: string, targetLang: string): Promise<string> => {
