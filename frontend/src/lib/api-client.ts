@@ -2,7 +2,8 @@
 import axios from "axios";
 import { useAuthStore } from "@/store/authStore";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -22,19 +23,26 @@ apiClient.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
+
+type FailedRequest = {
+  resolve: (token: string) => void;
+  reject: (err: unknown) => void;
+};
 
 // Response Interceptor: Silent Token Refresh
 let isRefreshing = false;
-let failedQueue: any[] = [];
+let failedQueue: FailedRequest[] = [];
 
-const processQueue = (error: any, token: string | null = null) => {
+const processQueue = (error: unknown, token: string | null = null) => {
   failedQueue.forEach((prom) => {
     if (error) {
       prom.reject(error);
-    } else {
+    } else if (token) {
       prom.resolve(token);
+    } else {
+      prom.reject(new Error("Token refresh failed: no token provided"));
     }
   });
   failedQueue = [];
@@ -43,21 +51,24 @@ const processQueue = (error: any, token: string | null = null) => {
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config;
+    const originalRequest = (error as any)?.config as
+      (any & { _retry?: boolean }) | undefined;
+
+    // If we can't safely inspect retry config, just reject (prevents interceptor crashes)
+    if (!originalRequest) return Promise.reject(error);
+
+    const status = (error as any)?.response?.status;
 
     // Check if error is 401 and we haven't retried yet
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
-        return new Promise((resolve, reject) => {
+        return new Promise<string>((resolve, reject) => {
           failedQueue.push({ resolve, reject });
-        })
-          .then((token) => {
-            originalRequest.headers.Authorization = `Bearer ${token}`;
-            return apiClient(originalRequest);
-          })
-          .catch((err) => {
-            return Promise.reject(err);
-          });
+        }).then((token) => {
+          originalRequest.headers = originalRequest.headers || {};
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          return apiClient(originalRequest);
+        });
       }
 
       originalRequest._retry = true;
@@ -75,11 +86,17 @@ apiClient.interceptors.response.use(
           refresh_token: refreshToken,
         });
 
-        const { access_token, refresh_token } = response.data;
+        const { access_token, refresh_token } = response.data as {
+          access_token: string;
+          refresh_token: string;
+        };
+
         const email = useAuthStore.getState().user?.email || "";
         useAuthStore.getState().login(access_token, refresh_token, email);
 
-        apiClient.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+        apiClient.defaults.headers.common["Authorization"] =
+          `Bearer ${access_token}`;
+        originalRequest.headers = originalRequest.headers || {};
         originalRequest.headers.Authorization = `Bearer ${access_token}`;
 
         processQueue(null, access_token);
@@ -95,5 +112,5 @@ apiClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );

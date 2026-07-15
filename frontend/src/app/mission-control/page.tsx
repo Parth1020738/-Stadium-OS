@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useTelemetryStore } from "@/store/telemetryStore";
 import {
   Brain,
   Activity,
@@ -12,9 +13,8 @@ import {
   CheckCircle,
   Globe,
   Sparkles,
-  Info
+  Info,
 } from "lucide-react";
-
 
 interface TimelineItem {
   time: string;
@@ -54,12 +54,23 @@ interface ScenarioTelemetry {
     time: string;
     requiresApproval: boolean;
   }>;
-  buses: Array<{ id: number; x: number; y: number; status: string; label: string }>;
-  volunteers: Array<{ id: number; name: string; x: number; y: number; status: string }>;
+  buses: Array<{
+    id: number;
+    x: number;
+    y: number;
+    status: string;
+    label: string;
+  }>;
+  volunteers: Array<{
+    id: number;
+    name: string;
+    x: number;
+    y: number;
+    status: string;
+  }>;
   crowdPoints: Array<{ x: number; y: number; density: number }>;
   gateState: string;
 }
-
 
 // Scenarios configuration with matching telemetry & AI briefs
 const MATCH_SCENARIOS = {
@@ -82,13 +93,29 @@ const MATCH_SCENARIOS = {
     objectives: [
       "Process incoming pre-match guest ticketing validation.",
       "Monitor shuttle fleet headway times (target: 6 mins).",
-      "Verify elevator diagnostic states near Gate C."
+      "Verify elevator diagnostic states near Gate C.",
     ],
-    brief: "Good Day. Gates are open and attendance has reached 60%. Transit shuttle headway remains stable at 6 minutes. Accessibility lanes are clear, and sustainability solar generation is satisfying 22% of stadium base load. Confidence: 98%.",
+    brief:
+      "Good Day. Gates are open and attendance has reached 60%. Transit shuttle headway remains stable at 6 minutes. Accessibility lanes are clear, and sustainability solar generation is satisfying 22% of stadium base load. Confidence: 98%.",
     timeline: [
-      { time: "16:00", action: "Gates opened successfully", agent: "Crowd Agent", status: "completed" },
-      { time: "16:15", action: "Shuttle fleet headway sync", agent: "Transit Agent", status: "completed" },
-      { time: "16:30", action: "Ticketing checks nominal", agent: "Security Agent", status: "completed" }
+      {
+        time: "16:00",
+        action: "Gates opened successfully",
+        agent: "Crowd Agent",
+        status: "completed",
+      },
+      {
+        time: "16:15",
+        action: "Shuttle fleet headway sync",
+        agent: "Transit Agent",
+        status: "completed",
+      },
+      {
+        time: "16:30",
+        action: "Ticketing checks nominal",
+        agent: "Security Agent",
+        status: "completed",
+      },
     ],
     recommendations: [
       {
@@ -101,24 +128,24 @@ const MATCH_SCENARIOS = {
         expectedImprovement: "Zero queue spikes.",
         depts: ["Security", "Crowd"],
         time: "Just now",
-        requiresApproval: false
-      }
+        requiresApproval: false,
+      },
     ],
     buses: [
       { id: 1, x: 80, y: 180, status: "moving", label: "Shuttle A" },
-      { id: 2, x: 220, y: 220, status: "moving", label: "Shuttle B" }
+      { id: 2, x: 220, y: 220, status: "moving", label: "Shuttle B" },
     ],
     volunteers: [
       { id: 1, name: "V1", x: 120, y: 80, status: "active" },
-      { id: 2, name: "V2", x: 380, y: 150, status: "active" }
+      { id: 2, name: "V2", x: 380, y: 150, status: "active" },
     ],
     crowdPoints: [
       { x: 100, y: 90, density: 0.2 },
-      { x: 390, y: 160, density: 0.3 }
+      { x: 390, y: 160, density: 0.3 },
     ],
-    gateState: "open"
+    gateState: "open",
   },
-  "Kickoff": {
+  Kickoff: {
     matchStatus: "Match Kickoff (1st Half)",
     attendance: 64200,
     crowdHeat: "MEDIUM",
@@ -137,13 +164,29 @@ const MATCH_SCENARIOS = {
     objectives: [
       "Stagger late ingress arrivals.",
       "Track outer concourse pedestrian flow density.",
-      "Standby emergency dispatch coordination."
+      "Standby emergency dispatch coordination.",
     ],
-    brief: "Good Day. Kickoff is active. Attendance is at 80% capacity. Low-priority queues are clearing at East Gate. Volunteer coverage is optimal across all stands. Energy consumption matches expected matchday lighting setback guidelines. Confidence: 95%.",
+    brief:
+      "Good Day. Kickoff is active. Attendance is at 80% capacity. Low-priority queues are clearing at East Gate. Volunteer coverage is optimal across all stands. Energy consumption matches expected matchday lighting setback guidelines. Confidence: 95%.",
     timeline: [
-      { time: "16:45", action: "Late arrivals wave processed", agent: "Crowd Agent", status: "completed" },
-      { time: "17:00", action: "Match kickoff confirmed", agent: "System Agent", status: "completed" },
-      { time: "17:05", action: "Concourse density verification", agent: "Security Agent", status: "completed" }
+      {
+        time: "16:45",
+        action: "Late arrivals wave processed",
+        agent: "Crowd Agent",
+        status: "completed",
+      },
+      {
+        time: "17:00",
+        action: "Match kickoff confirmed",
+        agent: "System Agent",
+        status: "completed",
+      },
+      {
+        time: "17:05",
+        action: "Concourse density verification",
+        agent: "Security Agent",
+        status: "completed",
+      },
     ],
     recommendations: [
       {
@@ -156,24 +199,24 @@ const MATCH_SCENARIOS = {
         expectedImprovement: "15% lower queue buildup.",
         depts: ["Transit", "Security"],
         time: "1 min ago",
-        requiresApproval: true
-      }
+        requiresApproval: true,
+      },
     ],
     buses: [
       { id: 1, x: 110, y: 180, status: "moving", label: "Shuttle A" },
-      { id: 2, x: 260, y: 220, status: "moving", label: "Shuttle B" }
+      { id: 2, x: 260, y: 220, status: "moving", label: "Shuttle B" },
     ],
     volunteers: [
       { id: 1, name: "V1", x: 140, y: 80, status: "active" },
-      { id: 2, name: "V2", x: 350, y: 150, status: "active" }
+      { id: 2, name: "V2", x: 350, y: 150, status: "active" },
     ],
     crowdPoints: [
       { x: 140, y: 90, density: 0.4 },
-      { x: 350, y: 160, density: 0.5 }
+      { x: 350, y: 160, density: 0.5 },
     ],
-    gateState: "open"
+    gateState: "open",
   },
-  "Goal": {
+  Goal: {
     matchStatus: "GOAL! (1-0)",
     attendance: 64500,
     crowdHeat: "HIGH",
@@ -192,43 +235,60 @@ const MATCH_SCENARIOS = {
     objectives: [
       "Monitor structural stand vibration indicators.",
       "Track volunteer deployments at South stand.",
-      "Check exit path ADA ramp clearances."
+      "Check exit path ADA ramp clearances.",
     ],
-    brief: "Goal scored! Stadium cheering has created a temporary stand vibration spike, which is within safe tolerances. Concourse exit gates are clear. All stewards are at high-vigilance positions. Confidence: 96%.",
+    brief:
+      "Goal scored! Stadium cheering has created a temporary stand vibration spike, which is within safe tolerances. Concourse exit gates are clear. All stewards are at high-vigilance positions. Confidence: 96%.",
     timeline: [
-      { time: "17:15", action: "Goal scored by home team", agent: "System Agent", status: "completed" },
-      { time: "17:16", action: "Stand structural vibration analyzed", agent: "Crowd Agent", status: "completed" },
-      { time: "17:18", action: "Corridor patrol check clear", agent: "Security Agent", status: "completed" }
+      {
+        time: "17:15",
+        action: "Goal scored by home team",
+        agent: "System Agent",
+        status: "completed",
+      },
+      {
+        time: "17:16",
+        action: "Stand structural vibration analyzed",
+        agent: "Crowd Agent",
+        status: "completed",
+      },
+      {
+        time: "17:18",
+        action: "Corridor patrol check clear",
+        agent: "Security Agent",
+        status: "completed",
+      },
     ],
     recommendations: [
       {
         title: "Maintain stand vibration monitoring",
         why: "To verify structural integrity during peak celebration waves.",
-        evidence: "Telemetry registered 1.2G vibration peak, safely below 2.5G threshold.",
+        evidence:
+          "Telemetry registered 1.2G vibration peak, safely below 2.5G threshold.",
         confidence: 0.97,
         alternatives: "Reroute exit paths.",
         risks: "None.",
         expectedImprovement: "Zero hazard reports.",
         depts: ["Crowd", "Security"],
         time: "Just now",
-        requiresApproval: false
-      }
+        requiresApproval: false,
+      },
     ],
     buses: [
       { id: 1, x: 130, y: 180, status: "stopped", label: "Shuttle A" },
-      { id: 2, x: 290, y: 220, status: "moving", label: "Shuttle B" }
+      { id: 2, x: 290, y: 220, status: "moving", label: "Shuttle B" },
     ],
     volunteers: [
       { id: 1, name: "V1", x: 160, y: 90, status: "active" },
-      { id: 2, name: "V2", x: 320, y: 150, status: "active" }
+      { id: 2, name: "V2", x: 320, y: 150, status: "active" },
     ],
     crowdPoints: [
       { x: 160, y: 110, density: 0.7 },
-      { x: 320, y: 160, density: 0.6 }
+      { x: 320, y: 160, density: 0.6 },
     ],
-    gateState: "open"
+    gateState: "open",
   },
-  "Halftime": {
+  Halftime: {
     matchStatus: "Halftime Interval",
     attendance: 64500,
     crowdHeat: "VERY HIGH",
@@ -247,41 +307,58 @@ const MATCH_SCENARIOS = {
     objectives: [
       "Manage concourse pedestrian flows.",
       "Implement main field lighting setback (15% drop).",
-      "Stagger suite HVAC setbacks to 23C."
+      "Stagger suite HVAC setbacks to 23C.",
     ],
-    brief: "Halftime in progress. Crowds are migrating to concourses and restroom zones. Energy saving setbacks activated: HVAC suite temperature set to 23C, base lighting output reduced by 15% to save 184 kWh grid loads. Confidence: 94%.",
+    brief:
+      "Halftime in progress. Crowds are migrating to concourses and restroom zones. Energy saving setbacks activated: HVAC suite temperature set to 23C, base lighting output reduced by 15% to save 184 kWh grid loads. Confidence: 94%.",
     timeline: [
-      { time: "17:45", action: "First half ends", agent: "System Agent", status: "completed" },
-      { time: "17:46", action: "Halftime energy setback activated", agent: "Sustainability Agent", status: "completed" },
-      { time: "17:48", action: "Concourse crowd flow guided", agent: "Volunteer Agent", status: "completed" }
+      {
+        time: "17:45",
+        action: "First half ends",
+        agent: "System Agent",
+        status: "completed",
+      },
+      {
+        time: "17:46",
+        action: "Halftime energy setback activated",
+        agent: "Sustainability Agent",
+        status: "completed",
+      },
+      {
+        time: "17:48",
+        action: "Concourse crowd flow guided",
+        agent: "Volunteer Agent",
+        status: "completed",
+      },
     ],
     recommendations: [
       {
         title: "Deploy concourse waste collectors",
         why: "To maintain hygiene and optimize waste diversion during halftime migration.",
-        evidence: "Concession stands garbage load spikes detected on weight bins.",
+        evidence:
+          "Concession stands garbage load spikes detected on weight bins.",
         confidence: 0.91,
         alternatives: "Postpone cleaning until full-time.",
         risks: "Minor passenger flow slowdown near bin points.",
         expectedImprovement: "30% reduction in corridor littering.",
         depts: ["Volunteer", "Sustainability"],
         time: "2 mins ago",
-        requiresApproval: true
-      }
+        requiresApproval: true,
+      },
     ],
     buses: [
       { id: 1, x: 150, y: 180, status: "moving", label: "Shuttle A" },
-      { id: 2, x: 310, y: 220, status: "moving", label: "Shuttle B" }
+      { id: 2, x: 310, y: 220, status: "moving", label: "Shuttle B" },
     ],
     volunteers: [
       { id: 1, name: "V1", x: 200, y: 100, status: "active" },
-      { id: 2, name: "V2", x: 280, y: 140, status: "active" }
+      { id: 2, name: "V2", x: 280, y: 140, status: "active" },
     ],
     crowdPoints: [
       { x: 200, y: 120, density: 0.8 },
-      { x: 280, y: 150, density: 0.8 }
+      { x: 280, y: 150, density: 0.8 },
     ],
-    gateState: "open"
+    gateState: "open",
   },
   "Crowd Surge": {
     matchStatus: "Egress In-Progress",
@@ -302,41 +379,58 @@ const MATCH_SCENARIOS = {
     objectives: [
       "Relieve Gate D turnstile scanning congestion.",
       "Deploy secondary volunteer stewards to South Stand.",
-      "Manage Metro Shuttle outer ring delays."
+      "Manage Metro Shuttle outer ring delays.",
     ],
-    brief: "WARNING: Gate D turnstiles are experiencing a 42% bottleneck, increasing local queue wait times to 15 minutes. Ingress rate (68/min) exceeds validation scanner rate (48/min). AI recommends executing secondary gate override. Confidence: 94%.",
+    brief:
+      "WARNING: Gate D turnstiles are experiencing a 42% bottleneck, increasing local queue wait times to 15 minutes. Ingress rate (68/min) exceeds validation scanner rate (48/min). AI recommends executing secondary gate override. Confidence: 94%.",
     timeline: [
-      { time: "18:15", action: "Gate D crowd bottleneck detected", agent: "Crowd Agent", status: "alert" },
-      { time: "18:16", action: "AI gate rate override generated", agent: "Brain Agent", status: "completed" },
-      { time: "18:18", action: "Volunteer team dispatch queued", agent: "Volunteer Agent", status: "completed" }
+      {
+        time: "18:15",
+        action: "Gate D crowd bottleneck detected",
+        agent: "Crowd Agent",
+        status: "alert",
+      },
+      {
+        time: "18:16",
+        action: "AI gate rate override generated",
+        agent: "Brain Agent",
+        status: "completed",
+      },
+      {
+        time: "18:18",
+        action: "Volunteer team dispatch queued",
+        agent: "Volunteer Agent",
+        status: "completed",
+      },
     ],
     recommendations: [
       {
         title: "Open Gate D secondary bypass gates",
         why: "To relieve turnstile backlog and reduce crowd density in Zone 2 corridor.",
-        evidence: "Crowd density reached 4.2 people/sqm (critical threshold: 3.5).",
+        evidence:
+          "Crowd density reached 4.2 people/sqm (critical threshold: 3.5).",
         confidence: 0.94,
         alternatives: "Reroute all arrivals to Gate E.",
         risks: "Steward patrols must secure outer perimeter zones.",
         expectedImprovement: "Reduces gate queue length by 25% in 6 minutes.",
         depts: ["Crowd", "Security", "Volunteer"],
         time: "Just now",
-        requiresApproval: true
-      }
+        requiresApproval: true,
+      },
     ],
     buses: [
       { id: 1, x: 180, y: 180, status: "stopped", label: "Shuttle A" },
-      { id: 2, x: 350, y: 220, status: "stopped", label: "Shuttle B" }
+      { id: 2, x: 350, y: 220, status: "stopped", label: "Shuttle B" },
     ],
     volunteers: [
       { id: 1, name: "V1", x: 220, y: 90, status: "active" },
-      { id: 2, name: "V2", x: 260, y: 150, status: "active" }
+      { id: 2, name: "V2", x: 260, y: 150, status: "active" },
     ],
     crowdPoints: [
       { x: 220, y: 100, density: 0.95 },
-      { x: 260, y: 140, density: 0.9 }
+      { x: 260, y: 140, density: 0.9 },
     ],
-    gateState: "congested"
+    gateState: "congested",
   },
   "Medical Emergency": {
     matchStatus: "Active Incident",
@@ -357,13 +451,29 @@ const MATCH_SCENARIOS = {
     objectives: [
       "Dispatch First Aid Squad 4 to Sector B.",
       "Clear medical response priority lanes.",
-      "Provide cold water and ice pack escorts."
+      "Provide cold water and ice pack escorts.",
     ],
-    brief: "ALERT: Minor medical issue reported at Sector B (visitor suffering heat exhaustion). Telemetry indicates paramedic ETA is 180 seconds. AI recommends clearing wheelchair bypass corridor to allow medic access. Confidence: 94%.",
+    brief:
+      "ALERT: Minor medical issue reported at Sector B (visitor suffering heat exhaustion). Telemetry indicates paramedic ETA is 180 seconds. AI recommends clearing wheelchair bypass corridor to allow medic access. Confidence: 94%.",
     timeline: [
-      { time: "18:30", action: "Steward logs heat dizziness at Row 14", agent: "Volunteer Agent", status: "alert" },
-      { time: "18:32", action: "First Aid Squad 4 dispatched", agent: "Medical Agent", status: "completed" },
-      { time: "18:34", action: "ADA pathway clearance verified", agent: "Accessibility Agent", status: "completed" }
+      {
+        time: "18:30",
+        action: "Steward logs heat dizziness at Row 14",
+        agent: "Volunteer Agent",
+        status: "alert",
+      },
+      {
+        time: "18:32",
+        action: "First Aid Squad 4 dispatched",
+        agent: "Medical Agent",
+        status: "completed",
+      },
+      {
+        time: "18:34",
+        action: "ADA pathway clearance verified",
+        agent: "Accessibility Agent",
+        status: "completed",
+      },
     ],
     recommendations: [
       {
@@ -376,22 +486,22 @@ const MATCH_SCENARIOS = {
         expectedImprovement: "Ensures medical care within 3-minute SLA.",
         depts: ["Medical", "Volunteer"],
         time: "Just now",
-        requiresApproval: true
-      }
+        requiresApproval: true,
+      },
     ],
     buses: [
       { id: 1, x: 200, y: 180, status: "moving", label: "Shuttle A" },
-      { id: 2, x: 380, y: 220, status: "moving", label: "Shuttle B" }
+      { id: 2, x: 380, y: 220, status: "moving", label: "Shuttle B" },
     ],
     volunteers: [
       { id: 1, name: "V1", x: 240, y: 80, status: "active" },
-      { id: 2, name: "V2", x: 230, y: 160, status: "active" }
+      { id: 2, name: "V2", x: 230, y: 160, status: "active" },
     ],
     crowdPoints: [
       { x: 240, y: 80, density: 0.5 },
-      { x: 230, y: 160, density: 0.5 }
+      { x: 230, y: 160, density: 0.5 },
     ],
-    gateState: "open"
+    gateState: "open",
   },
   "Power Failure": {
     matchStatus: "Partial Outage",
@@ -412,13 +522,29 @@ const MATCH_SCENARIOS = {
     objectives: [
       "Engage auxiliary diesel generator backups.",
       "Dispatch security patrols to North Concourse corridors.",
-      "Check elevator backup battery statuses."
+      "Check elevator backup battery statuses.",
     ],
-    brief: "CRITICAL ALERT: Partial power outage detected in North Stand sector. Auxiliary generators are online. Elevator 2 near Gate C door lock system failed; tech team has been notified. Deploying stewards for manual guidance. Confidence: 98%.",
+    brief:
+      "CRITICAL ALERT: Partial power outage detected in North Stand sector. Auxiliary generators are online. Elevator 2 near Gate C door lock system failed; tech team has been notified. Deploying stewards for manual guidance. Confidence: 98%.",
     timeline: [
-      { time: "18:45", action: "North Stand power drop registered", agent: "System Agent", status: "alert" },
-      { time: "18:46", action: "Auxiliary generators engaged", agent: "Sustainability Agent", status: "completed" },
-      { time: "18:48", action: "Elevator 2 door lock fault flagged", agent: "Accessibility Agent", status: "alert" }
+      {
+        time: "18:45",
+        action: "North Stand power drop registered",
+        agent: "System Agent",
+        status: "alert",
+      },
+      {
+        time: "18:46",
+        action: "Auxiliary generators engaged",
+        agent: "Sustainability Agent",
+        status: "completed",
+      },
+      {
+        time: "18:48",
+        action: "Elevator 2 door lock fault flagged",
+        agent: "Accessibility Agent",
+        status: "alert",
+      },
     ],
     recommendations: [
       {
@@ -431,22 +557,22 @@ const MATCH_SCENARIOS = {
         expectedImprovement: "Continuous vertical mobility achieved.",
         depts: ["Accessibility", "Volunteer"],
         time: "1 min ago",
-        requiresApproval: true
-      }
+        requiresApproval: true,
+      },
     ],
     buses: [
       { id: 1, x: 220, y: 180, status: "moving", label: "Shuttle A" },
-      { id: 2, x: 410, y: 220, status: "moving", label: "Shuttle B" }
+      { id: 2, x: 410, y: 220, status: "moving", label: "Shuttle B" },
     ],
     volunteers: [
       { id: 1, name: "V1", x: 260, y: 80, status: "alert" },
-      { id: 2, name: "V2", x: 210, y: 160, status: "alert" }
+      { id: 2, name: "V2", x: 210, y: 160, status: "alert" },
     ],
     crowdPoints: [
       { x: 260, y: 80, density: 0.75 },
-      { x: 210, y: 160, density: 0.6 }
+      { x: 210, y: 160, density: 0.6 },
     ],
-    gateState: "open"
+    gateState: "open",
   },
   "Heavy Rain": {
     matchStatus: "Weather Delay Alert",
@@ -467,41 +593,58 @@ const MATCH_SCENARIOS = {
     objectives: [
       "Deploy canopy extensions over Gate D queue lines.",
       "Post wet flooring warning notices on digital boards.",
-      "Coordinate public transit delay notifications."
+      "Coordinate public transit delay notifications.",
     ],
-    brief: "ALERT: Doppler radar shows precipitation band approaching. Heavy rain has started. AI predicts sudden crowd migration from open stands to covered concourses. Wet flooring hazard warnings active. Confidence: 90%.",
+    brief:
+      "ALERT: Doppler radar shows precipitation band approaching. Heavy rain has started. AI predicts sudden crowd migration from open stands to covered concourses. Wet flooring hazard warnings active. Confidence: 90%.",
     timeline: [
-      { time: "19:00", action: "Precipitation warning received", agent: "Weather Agent", status: "completed" },
-      { time: "19:02", action: "Concourse canopy deployed", agent: "Crowd Agent", status: "completed" },
-      { time: "19:05", action: "Wet ramp warning signs active", agent: "Volunteer Agent", status: "completed" }
+      {
+        time: "19:00",
+        action: "Precipitation warning received",
+        agent: "Weather Agent",
+        status: "completed",
+      },
+      {
+        time: "19:02",
+        action: "Concourse canopy deployed",
+        agent: "Crowd Agent",
+        status: "completed",
+      },
+      {
+        time: "19:05",
+        action: "Wet ramp warning signs active",
+        agent: "Volunteer Agent",
+        status: "completed",
+      },
     ],
     recommendations: [
       {
         title: "Deploy canopy extensions over Gate D",
         why: "To shield waiting visitors and prevent stampede waves into entry gates.",
-        evidence: "Rain volume reached 15mm/hour; visitors congregating at entry bottlenecks.",
-        confidence: 0.90,
+        evidence:
+          "Rain volume reached 15mm/hour; visitors congregating at entry bottlenecks.",
+        confidence: 0.9,
         alternatives: "Suggest visitors hold in parking structures.",
         risks: "Minor canopy wind-load warnings.",
         expectedImprovement: "Maintains orderly queue line flows.",
         depts: ["Crowd", "Volunteer"],
         time: "Just now",
-        requiresApproval: false
-      }
+        requiresApproval: false,
+      },
     ],
     buses: [
       { id: 1, x: 240, y: 180, status: "moving", label: "Shuttle A" },
-      { id: 2, x: 440, y: 220, status: "moving", label: "Shuttle B" }
+      { id: 2, x: 440, y: 220, status: "moving", label: "Shuttle B" },
     ],
     volunteers: [
       { id: 1, name: "V1", x: 280, y: 80, status: "active" },
-      { id: 2, name: "V2", x: 190, y: 160, status: "active" }
+      { id: 2, name: "V2", x: 190, y: 160, status: "active" },
     ],
     crowdPoints: [
       { x: 280, y: 80, density: 0.5 },
-      { x: 190, y: 160, density: 0.55 }
+      { x: 190, y: 160, density: 0.55 },
     ],
-    gateState: "open"
+    gateState: "open",
   },
   "Security Alert": {
     matchStatus: "Security Threat",
@@ -522,13 +665,29 @@ const MATCH_SCENARIOS = {
     objectives: [
       "Verify CCTV feed intrusion detection at Zone 3.",
       "Deploy security containment teams.",
-      "Restrict Zone 3 corridor access."
+      "Restrict Zone 3 corridor access.",
     ],
-    brief: "ALERT: Security intrusion alarm triggered in Zone 3 player tunnel. CCTV feed indicates unauthorized spectator bypass. Paramedics and stewards are redirecting concourse exit crowds to safety corridors. Confidence: 94%.",
+    brief:
+      "ALERT: Security intrusion alarm triggered in Zone 3 player tunnel. CCTV feed indicates unauthorized spectator bypass. Paramedics and stewards are redirecting concourse exit crowds to safety corridors. Confidence: 94%.",
     timeline: [
-      { time: "19:15", action: "CCTV Sensor 12 intrusion flag", agent: "Security Agent", status: "alert" },
-      { time: "19:16", action: "Containment team deployed to corridor", agent: "Security Agent", status: "completed" },
-      { time: "19:18", action: "Zone 3 doors locked down", agent: "System Agent", status: "completed" }
+      {
+        time: "19:15",
+        action: "CCTV Sensor 12 intrusion flag",
+        agent: "Security Agent",
+        status: "alert",
+      },
+      {
+        time: "19:16",
+        action: "Containment team deployed to corridor",
+        agent: "Security Agent",
+        status: "completed",
+      },
+      {
+        time: "19:18",
+        action: "Zone 3 doors locked down",
+        agent: "System Agent",
+        status: "completed",
+      },
     ],
     recommendations: [
       {
@@ -541,24 +700,24 @@ const MATCH_SCENARIOS = {
         expectedImprovement: "Perimeter containment completed in 4 minutes.",
         depts: ["Security"],
         time: "2 mins ago",
-        requiresApproval: true
-      }
+        requiresApproval: true,
+      },
     ],
     buses: [
       { id: 1, x: 260, y: 180, status: "moving", label: "Shuttle A" },
-      { id: 2, x: 420, y: 220, status: "moving", label: "Shuttle B" }
+      { id: 2, x: 420, y: 220, status: "moving", label: "Shuttle B" },
     ],
     volunteers: [
       { id: 1, name: "V1", x: 300, y: 80, status: "alert" },
-      { id: 2, name: "V2", x: 170, y: 160, status: "alert" }
+      { id: 2, name: "V2", x: 170, y: 160, status: "alert" },
     ],
     crowdPoints: [
       { x: 300, y: 80, density: 0.6 },
-      { x: 170, y: 160, density: 0.6 }
+      { x: 170, y: 160, density: 0.6 },
     ],
-    gateState: "congested"
+    gateState: "congested",
   },
-  "Evacuation": {
+  Evacuation: {
     matchStatus: "Stadium Evacuation Mode",
     attendance: 64200,
     crowdHeat: "CRITICAL",
@@ -577,102 +736,134 @@ const MATCH_SCENARIOS = {
     objectives: [
       "Unlock all perimeter gates immediately.",
       "Publish evacuation broadcasts in 5 languages.",
-      "Maximize shuttle fleet exit capacities."
+      "Maximize shuttle fleet exit capacities.",
     ],
-    brief: "CRITICAL EVACUATION BROADCAST: Safety override active. Evacuation warning initiated for South Concourse. All exit pathways unlocked. English, Spanish, French, Portuguese, Arabic PA broadcasts dispatched. Confidence: 98%.",
+    brief:
+      "CRITICAL EVACUATION BROADCAST: Safety override active. Evacuation warning initiated for South Concourse. All exit pathways unlocked. English, Spanish, French, Portuguese, Arabic PA broadcasts dispatched. Confidence: 98%.",
     timeline: [
-      { time: "19:30", action: "Evacuation alarm triggered", agent: "System Agent", status: "alert" },
-      { time: "19:31", action: "Safety override unlocked all gates", agent: "Security Agent", status: "completed" },
-      { time: "19:33", action: "Emergency shuttle dispatch active", agent: "Transit Agent", status: "completed" }
+      {
+        time: "19:30",
+        action: "Evacuation alarm triggered",
+        agent: "System Agent",
+        status: "alert",
+      },
+      {
+        time: "19:31",
+        action: "Safety override unlocked all gates",
+        agent: "Security Agent",
+        status: "completed",
+      },
+      {
+        time: "19:33",
+        action: "Emergency shuttle dispatch active",
+        agent: "Transit Agent",
+        status: "completed",
+      },
     ],
     recommendations: [
       {
         title: "Initiate emergency evacuation warning",
         why: "To coordinate orderly guest evacuation and prevent crowding stampedes.",
-        evidence: "Stadium-wide risk score reached 92% (critical evacuation limit).",
+        evidence:
+          "Stadium-wide risk score reached 92% (critical evacuation limit).",
         confidence: 0.98,
         alternatives: "Perform staged stand evacuations.",
         risks: "High passenger panic increases queue density near exits.",
-        expectedImprovement: "Ensures complete stadium clearance in under 12 minutes.",
+        expectedImprovement:
+          "Ensures complete stadium clearance in under 12 minutes.",
         depts: ["Security", "Transit", "Medical", "Volunteer"],
         time: "Just now",
-        requiresApproval: true
-      }
+        requiresApproval: true,
+      },
     ],
     buses: [
       { id: 1, x: 280, y: 180, status: "moving", label: "Shuttle A" },
-      { id: 2, x: 450, y: 220, status: "moving", label: "Shuttle B" }
+      { id: 2, x: 450, y: 220, status: "moving", label: "Shuttle B" },
     ],
     volunteers: [
       { id: 1, name: "V1", x: 320, y: 80, status: "alert" },
-      { id: 2, name: "V2", x: 150, y: 160, status: "alert" }
+      { id: 2, name: "V2", x: 150, y: 160, status: "alert" },
     ],
     crowdPoints: [
       { x: 320, y: 80, density: 0.99 },
-      { x: 150, y: 160, density: 0.99 }
+      { x: 150, y: 160, density: 0.99 },
     ],
-    gateState: "open"
-  }
+    gateState: "open",
+  },
 };
 
 export default function MissionControlPage() {
-  const [activeScenarioName, setActiveScenarioName] = useState<string>("Pre-Match");
+  const [activeScenarioName, setActiveScenarioName] =
+    useState<string>("Pre-Match");
   const [demoRunning, setDemoRunning] = useState<boolean>(false);
-  const [syncStatus, setSyncStatus] = useState<"SYNCED" | "SYNCING" | "ALERT">("SYNCED");
-  const [approvedCommands, setApprovedCommands] = useState<Record<string, boolean>>({});
+  const [syncStatus, setSyncStatus] = useState<"SYNCED" | "SYNCING" | "ALERT">(
+    "SYNCED",
+  );
+  const wsConnected = useTelemetryStore((s) => s.wsConnected);
+  const [approvedCommands, setApprovedCommands] = useState<
+    Record<string, boolean>
+  >({});
   const [executedCommands, setExecutedCommands] = useState<string[]>([]);
   const [commandFeedback, setCommandFeedback] = useState<string | null>(null);
-  
+
   const demoIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const scenarioNames = useMemo(() => Object.keys(MATCH_SCENARIOS), []);
 
-  const scenarioData = (MATCH_SCENARIOS as Record<string, ScenarioTelemetry>)[activeScenarioName] || MATCH_SCENARIOS["Pre-Match"];
+  const scenarioData =
+    (MATCH_SCENARIOS as Record<string, ScenarioTelemetry>)[
+      activeScenarioName
+    ] || MATCH_SCENARIOS["Pre-Match"];
 
   // Fluctuate telemetry values dynamically to show "live digital twin"
-  const [liveTelemetry, setLiveTelemetry] = useState<ScenarioTelemetry>(scenarioData);
+  const [liveTelemetry, setLiveTelemetry] =
+    useState<ScenarioTelemetry>(scenarioData);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLiveTelemetry(scenarioData);
   }, [activeScenarioName, scenarioData]);
 
-  // Telemetry fluctuation effect
+  // Telemetry fluctuation effect (throttled sync status to reduce re-renders)
   useEffect(() => {
     const timer = setInterval(() => {
       setSyncStatus("SYNCING");
+
       setLiveTelemetry((prev: ScenarioTelemetry) => {
         const attendanceOffset = Math.floor(Math.random() * 20) - 10;
         const energyOffset = Math.floor(Math.random() * 6) - 3;
         const riskOffset = parseFloat((Math.random() * 2 - 1).toFixed(1));
         const newRisk = Math.min(100, Math.max(5, prev.riskScore + riskOffset));
-        
-        // Randomly update digital twin vehicle positions
+
         const nextBuses = prev.buses.map((bus) => {
           if (bus.status === "moving") {
-            const nextX = bus.x >= 450 ? 50 : bus.x + Math.floor(Math.random() * 15) + 5;
+            const nextX =
+              bus.x >= 450 ? 50 : bus.x + Math.floor(Math.random() * 15) + 5;
             return { ...bus, x: nextX };
           }
           return bus;
         });
 
-        // Randomly nudge volunteer stewards coordinates
         const nextVolunteers = prev.volunteers.map((v) => ({
           ...v,
           x: v.x + (Math.floor(Math.random() * 6) - 3),
-          y: v.y + (Math.floor(Math.random() * 6) - 3)
+          y: v.y + (Math.floor(Math.random() * 6) - 3),
         }));
 
         return {
           ...prev,
           attendance: Math.max(1000, prev.attendance + attendanceOffset),
-          energyConsumption: Math.max(50, prev.energyConsumption + energyOffset),
+          energyConsumption: Math.max(
+            50,
+            prev.energyConsumption + energyOffset,
+          ),
           riskScore: parseFloat(newRisk.toFixed(1)),
           healthScore: Math.round(100 - newRisk),
           buses: nextBuses,
-          volunteers: nextVolunteers
+          volunteers: nextVolunteers,
         };
       });
-      setTimeout(() => setSyncStatus("SYNCED"), 600);
+
+      window.setTimeout(() => setSyncStatus("SYNCED"), 600);
     }, 4000);
 
     return () => clearInterval(timer);
@@ -688,7 +879,7 @@ export default function MissionControlPage() {
 
     setDemoRunning(true);
     let scenarioIdx = 0;
-    
+
     // Cycle every 8 seconds
     demoIntervalRef.current = setInterval(() => {
       scenarioIdx = (scenarioIdx + 1) % scenarioNames.length;
@@ -707,9 +898,13 @@ export default function MissionControlPage() {
     setApprovedCommands((prev) => ({ ...prev, [commandTitle]: isApproved }));
     if (isApproved) {
       setExecutedCommands((prev) => [commandTitle, ...prev]);
-      setCommandFeedback(`Command "${commandTitle}" approved & dispatched successfully via Two-Person Auth.`);
+      setCommandFeedback(
+        `Command "${commandTitle}" approved & dispatched successfully via Two-Person Auth.`,
+      );
     } else {
-      setCommandFeedback(`Command "${commandTitle}" rejected by operator constraint override.`);
+      setCommandFeedback(
+        `Command "${commandTitle}" rejected by operator constraint override.`,
+      );
     }
     setTimeout(() => setCommandFeedback(null), 4000);
   };
@@ -724,10 +919,17 @@ export default function MissionControlPage() {
               FIFA OPERATIONS
             </span>
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
-            <span className="text-[10px] text-zinc-400 font-mono">Digital Twin Synced: {syncStatus}</span>
+            <span
+              role="status"
+              aria-live="polite"
+              className="text-[10px] text-zinc-400 font-mono"
+            >
+              Digital Twin Synced: {syncStatus}
+            </span>
           </div>
           <h1 className="text-2xl font-black tracking-tight text-white mt-1 uppercase flex items-center gap-2">
-            <Brain className="text-primary animate-pulse" size={24} /> Aegis Smart Stadium OS — Executive Commander Dashboard
+            <Brain className="text-primary animate-pulse" size={24} /> Aegis
+            Smart Stadium OS — Executive Commander Dashboard
           </h1>
         </div>
 
@@ -746,6 +948,17 @@ export default function MissionControlPage() {
           </button>
         </div>
       </div>
+
+      {!wsConnected && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="p-3.5 bg-zinc-950/70 border border-zinc-800/60 rounded-lg text-zinc-300 text-xs flex items-center gap-2"
+        >
+          <Info size={14} className="text-amber-400" />
+          Telemetry offline. Running demo simulation in best-effort mode.
+        </div>
+      )}
 
       {commandFeedback && (
         <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/30 rounded-lg text-emerald-400 text-xs flex items-center gap-2 animate-fadeIn">
@@ -770,6 +983,8 @@ export default function MissionControlPage() {
           {scenarioNames.map((name) => (
             <button
               key={name}
+              type="button"
+              aria-pressed={activeScenarioName === name}
               onClick={() => {
                 if (demoRunning) handleStartDemo(); // pause autopilot on manual click
                 setActiveScenarioName(name);
@@ -791,15 +1006,36 @@ export default function MissionControlPage() {
         {/* Stadium Health Circular Gauge */}
         <div className="bg-card border border-border p-4 rounded-xl flex items-center justify-between hover:border-primary/40 transition-all">
           <div className="space-y-1">
-            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">Overall Health</span>
-            <span className="text-3xl font-black block text-emerald-400 font-mono">{liveTelemetry.healthScore}%</span>
-            <span className="text-[9px] text-zinc-400 block">Ingestion telemetry nominal</span>
+            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">
+              Overall Health
+            </span>
+            <span className="text-3xl font-black block text-emerald-400 font-mono">
+              {liveTelemetry.healthScore}%
+            </span>
+            <span className="text-[9px] text-zinc-400 block">
+              Ingestion telemetry nominal
+            </span>
           </div>
           <div className="relative h-14 w-14 flex items-center justify-center">
             <svg className="absolute w-full h-full transform -rotate-90">
-              <circle cx="28" cy="28" r="24" className="stroke-zinc-800" strokeWidth="4" fill="transparent" />
-              <circle cx="28" cy="28" r="24" className="stroke-emerald-500" strokeWidth="4" fill="transparent"
-                strokeDasharray={150} strokeDashoffset={150 - (150 * liveTelemetry.healthScore) / 100} />
+              <circle
+                cx="28"
+                cy="28"
+                r="24"
+                className="stroke-zinc-800"
+                strokeWidth="4"
+                fill="transparent"
+              />
+              <circle
+                cx="28"
+                cy="28"
+                r="24"
+                className="stroke-emerald-500"
+                strokeWidth="4"
+                fill="transparent"
+                strokeDasharray={150}
+                strokeDashoffset={150 - (150 * liveTelemetry.healthScore) / 100}
+              />
             </svg>
             <Brain size={18} className="text-emerald-400" />
           </div>
@@ -808,28 +1044,66 @@ export default function MissionControlPage() {
         {/* Operational Risk Gauge */}
         <div className="bg-card border border-border p-4 rounded-xl flex items-center justify-between hover:border-primary/40 transition-all">
           <div className="space-y-1">
-            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">Risk Index</span>
-            <span className={`text-3xl font-black block font-mono ${liveTelemetry.riskScore > 50 ? "text-red-400" : "text-yellow-400"}`}>
+            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">
+              Risk Index
+            </span>
+            <span
+              className={`text-3xl font-black block font-mono ${liveTelemetry.riskScore > 50 ? "text-red-400" : "text-yellow-400"}`}
+            >
               {liveTelemetry.riskScore}%
             </span>
-            <span className="text-[9px] text-zinc-400 block uppercase font-semibold">Status: {liveTelemetry.riskScore > 50 ? "CRITICAL" : "NOMINAL"}</span>
+            <span className="text-[9px] text-zinc-400 block uppercase font-semibold">
+              Status: {liveTelemetry.riskScore > 50 ? "CRITICAL" : "NOMINAL"}
+            </span>
           </div>
           <div className="relative h-14 w-14 flex items-center justify-center">
             <svg className="absolute w-full h-full transform -rotate-90">
-              <circle cx="28" cy="28" r="24" className="stroke-zinc-800" strokeWidth="4" fill="transparent" />
-              <circle cx="28" cy="28" r="24" className={liveTelemetry.riskScore > 50 ? "stroke-red-500" : "stroke-yellow-500"} strokeWidth="4" fill="transparent"
-                strokeDasharray={150} strokeDashoffset={150 - (150 * liveTelemetry.riskScore) / 100} />
+              <circle
+                cx="28"
+                cy="28"
+                r="24"
+                className="stroke-zinc-800"
+                strokeWidth="4"
+                fill="transparent"
+              />
+              <circle
+                cx="28"
+                cy="28"
+                r="24"
+                className={
+                  liveTelemetry.riskScore > 50
+                    ? "stroke-red-500"
+                    : "stroke-yellow-500"
+                }
+                strokeWidth="4"
+                fill="transparent"
+                strokeDasharray={150}
+                strokeDashoffset={150 - (150 * liveTelemetry.riskScore) / 100}
+              />
             </svg>
-            <AlertTriangle size={18} className={liveTelemetry.riskScore > 50 ? "text-red-400" : "text-yellow-400"} />
+            <AlertTriangle
+              size={18}
+              className={
+                liveTelemetry.riskScore > 50
+                  ? "text-red-400"
+                  : "text-yellow-400"
+              }
+            />
           </div>
         </div>
 
         {/* Attendance Counter */}
         <div className="bg-card border border-border p-4 rounded-xl flex items-center justify-between hover:border-primary/40 transition-all">
           <div className="space-y-1">
-            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">Attendance</span>
-            <span className="text-3xl font-black block font-mono">{liveTelemetry.attendance.toLocaleString()}</span>
-            <span className="text-[9px] text-zinc-400 block">Stands Capacity: 65,000 max</span>
+            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">
+              Attendance
+            </span>
+            <span className="text-3xl font-black block font-mono">
+              {liveTelemetry.attendance.toLocaleString()}
+            </span>
+            <span className="text-[9px] text-zinc-400 block">
+              Stands Capacity: 65,000 max
+            </span>
           </div>
           <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
             <Users size={22} />
@@ -839,9 +1113,15 @@ export default function MissionControlPage() {
         {/* Sustainability Carbon metrics */}
         <div className="bg-card border border-border p-4 rounded-xl flex items-center justify-between hover:border-primary/40 transition-all">
           <div className="space-y-1">
-            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">Carbon Offset</span>
-            <span className="text-3xl font-black block text-emerald-400 font-mono">-{liveTelemetry.carbonSavings}%</span>
-            <span className="text-[9px] text-zinc-400 block">Energy Load: {liveTelemetry.energyConsumption} kW</span>
+            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">
+              Carbon Offset
+            </span>
+            <span className="text-3xl font-black block text-emerald-400 font-mono">
+              -{liveTelemetry.carbonSavings}%
+            </span>
+            <span className="text-[9px] text-zinc-400 block">
+              Energy Load: {liveTelemetry.energyConsumption} kW
+            </span>
           </div>
           <div className="h-12 w-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
             <Zap size={22} />
@@ -851,11 +1131,15 @@ export default function MissionControlPage() {
         {/* Matchday Details */}
         <div className="bg-card border border-border p-4 rounded-xl flex items-center justify-between hover:border-primary/40 transition-all md:col-span-2 lg:col-span-4 xl:col-span-1">
           <div className="space-y-1">
-            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">Match Status</span>
+            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider block">
+              Match Status
+            </span>
             <span className="text-sm font-black block text-primary uppercase leading-tight truncate">
               {liveTelemetry.matchStatus}
             </span>
-            <span className="text-[9px] text-zinc-400 block">{liveTelemetry.weather}</span>
+            <span className="text-[9px] text-zinc-400 block">
+              {liveTelemetry.weather}
+            </span>
           </div>
           <div className="h-12 w-12 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400">
             <Globe size={22} />
@@ -865,7 +1149,6 @@ export default function MissionControlPage() {
 
       {/* Middle Layout Grid: Digital Twin & Executive Briefing */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        
         {/* Live Digital Twin Viewport (Col span 2) */}
         <div className="xl:col-span-2 bg-card border border-border rounded-xl p-5 space-y-4">
           <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
@@ -882,19 +1165,62 @@ export default function MissionControlPage() {
           <div className="relative w-full h-[360px] bg-zinc-950 border border-zinc-850 rounded-lg overflow-hidden flex items-center justify-center">
             {/* Grid overlay */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:24px_24px] opacity-10"></div>
-            
+
             {/* Visual Stadium Ring Representation */}
-            <svg width="100%" height="100%" viewBox="0 0 500 300" className="absolute">
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 500 300"
+              className="absolute"
+            >
               {/* Outer boundary Ring */}
-              <ellipse cx="250" cy="150" rx="200" ry="110" className="stroke-zinc-800" strokeWidth="2" strokeDasharray="5" fill="none" />
-              
+              <ellipse
+                cx="250"
+                cy="150"
+                rx="200"
+                ry="110"
+                className="stroke-zinc-800"
+                strokeWidth="2"
+                strokeDasharray="5"
+                fill="none"
+              />
+
               {/* Stadium Bowl outer perimeter */}
-              <ellipse cx="250" cy="150" rx="160" ry="85" className="stroke-zinc-700" strokeWidth="4" fill="none" />
+              <ellipse
+                cx="250"
+                cy="150"
+                rx="160"
+                ry="85"
+                className="stroke-zinc-700"
+                strokeWidth="4"
+                fill="none"
+              />
 
               {/* Pitch */}
-              <rect x="190" y="115" width="120" height="70" className="stroke-emerald-600/60 fill-emerald-950/20" strokeWidth="2" />
-              <line x1="250" y1="115" x2="250" y2="185" className="stroke-emerald-600/60" strokeWidth="2" />
-              <circle cx="250" cy="150" r="15" className="stroke-emerald-600/60" strokeWidth="2" fill="none" />
+              <rect
+                x="190"
+                y="115"
+                width="120"
+                height="70"
+                className="stroke-emerald-600/60 fill-emerald-950/20"
+                strokeWidth="2"
+              />
+              <line
+                x1="250"
+                y1="115"
+                x2="250"
+                y2="185"
+                className="stroke-emerald-600/60"
+                strokeWidth="2"
+              />
+              <circle
+                cx="250"
+                cy="150"
+                r="15"
+                className="stroke-emerald-600/60"
+                strokeWidth="2"
+                fill="none"
+              />
 
               {/* Dynamic Crowd Heat points */}
               {liveTelemetry.crowdPoints.map((pt, idx: number) => (
@@ -903,38 +1229,100 @@ export default function MissionControlPage() {
                   cx={pt.x}
                   cy={pt.y}
                   r={30 * pt.density}
-                  className={liveTelemetry.riskScore > 50 ? "fill-red-500/20 stroke-red-500/30 animate-pulse" : "fill-primary/20 stroke-primary/30 animate-pulse"}
+                  className={
+                    liveTelemetry.riskScore > 50
+                      ? "fill-red-500/20 stroke-red-500/30 animate-pulse"
+                      : "fill-primary/20 stroke-primary/30 animate-pulse"
+                  }
                   strokeWidth="2"
                 />
               ))}
 
               {/* Active Shuttle Bus movement representation */}
               {liveTelemetry.buses.map((bus) => (
-                <g key={bus.id} transform={`translate(${bus.x}, ${bus.y})`} className="transition-all duration-1000">
-                  <rect x="-8" y="-6" width="16" height="12" rx="2" className="fill-yellow-500 stroke-zinc-950" strokeWidth="1.5" />
+                <g
+                  key={bus.id}
+                  transform={`translate(${bus.x}, ${bus.y})`}
+                  className="transition-all duration-1000"
+                >
+                  <rect
+                    x="-8"
+                    y="-6"
+                    width="16"
+                    height="12"
+                    rx="2"
+                    className="fill-yellow-500 stroke-zinc-950"
+                    strokeWidth="1.5"
+                  />
                   <circle cx="-5" cy="8" r="2.5" className="fill-zinc-800" />
                   <circle cx="5" cy="8" r="2.5" className="fill-zinc-800" />
-                  <text x="-7" y="1" className="fill-black font-black text-[5px] font-mono">{bus.id}</text>
+                  <text
+                    x="-7"
+                    y="1"
+                    className="fill-black font-black text-[5px] font-mono"
+                  >
+                    {bus.id}
+                  </text>
                 </g>
               ))}
 
               {/* Active Volunteer location markers */}
               {liveTelemetry.volunteers.map((v) => (
                 <g key={v.id} transform={`translate(${v.x}, ${v.y})`}>
-                  <circle cx="0" cy="0" r="5" className="fill-indigo-500 stroke-white" strokeWidth="1" />
-                  <text x="-3" y="11" className="fill-zinc-400 font-mono text-[7px]">{v.name}</text>
+                  <circle
+                    cx="0"
+                    cy="0"
+                    r="5"
+                    className="fill-indigo-500 stroke-white"
+                    strokeWidth="1"
+                  />
+                  <text
+                    x="-3"
+                    y="11"
+                    className="fill-zinc-400 font-mono text-[7px]"
+                  >
+                    {v.name}
+                  </text>
                 </g>
               ))}
 
               {/* Gate indicators */}
               <g transform="translate(90, 150)">
-                <circle cx="0" cy="0" r="8" className={liveTelemetry.gateState === "congested" ? "fill-red-500/20 stroke-red-500 animate-pulse" : "fill-emerald-500/20 stroke-emerald-500 animate-pulse"} strokeWidth="2" />
-                <text x="-25" y="-12" className="fill-zinc-300 font-mono text-[8px] font-bold">Gate D</text>
+                <circle
+                  cx="0"
+                  cy="0"
+                  r="8"
+                  className={
+                    liveTelemetry.gateState === "congested"
+                      ? "fill-red-500/20 stroke-red-500 animate-pulse"
+                      : "fill-emerald-500/20 stroke-emerald-500 animate-pulse"
+                  }
+                  strokeWidth="2"
+                />
+                <text
+                  x="-25"
+                  y="-12"
+                  className="fill-zinc-300 font-mono text-[8px] font-bold"
+                >
+                  Gate D
+                </text>
               </g>
 
               <g transform="translate(410, 150)">
-                <circle cx="0" cy="0" r="8" className="fill-emerald-500/20 stroke-emerald-500 animate-pulse" strokeWidth="2" />
-                <text x="5" y="-12" className="fill-zinc-300 font-mono text-[8px] font-bold">Gate E</text>
+                <circle
+                  cx="0"
+                  cy="0"
+                  r="8"
+                  className="fill-emerald-500/20 stroke-emerald-500 animate-pulse"
+                  strokeWidth="2"
+                />
+                <text
+                  x="5"
+                  y="-12"
+                  className="fill-zinc-300 font-mono text-[8px] font-bold"
+                >
+                  Gate E
+                </text>
               </g>
             </svg>
 
@@ -961,9 +1349,13 @@ export default function MissionControlPage() {
 
             {/* Live Camera Feed Simulated Overlay */}
             <div className="absolute top-4 right-4 bg-zinc-950/80 border border-zinc-850 p-2.5 rounded-md text-[9px] font-mono space-y-1">
-              <span className="text-zinc-400 block font-bold">CCTV BROADCAST STREAM</span>
+              <span className="text-zinc-400 block font-bold">
+                CCTV BROADCAST STREAM
+              </span>
               <div className="h-14 w-28 bg-zinc-900 border border-zinc-800 rounded flex items-center justify-center text-[7px] text-zinc-500 relative">
-                <span className="absolute top-1 left-1 text-red-500 animate-pulse font-bold">● LIVE</span>
+                <span className="absolute top-1 left-1 text-red-500 animate-pulse font-bold">
+                  ● LIVE
+                </span>
                 <span>CAM-04 (GATE D)</span>
               </div>
             </div>
@@ -979,7 +1371,7 @@ export default function MissionControlPage() {
                 Executive AI Briefing Card
               </h2>
             </div>
-            
+
             <div className="bg-zinc-950/80 border border-zinc-850 p-4 rounded-lg space-y-3 text-xs leading-relaxed">
               <div className="flex justify-between items-center text-[10px] text-zinc-500 font-mono">
                 <span>COMPILED FOR FIFA COMMANDER</span>
@@ -994,40 +1386,48 @@ export default function MissionControlPage() {
             <div className="space-y-2 pt-2 text-xs">
               <div className="flex justify-between items-center py-1.5 border-b border-zinc-900">
                 <span className="text-zinc-400">Security Patrol Status:</span>
-                <span className={`font-mono font-bold ${liveTelemetry.securityStatus === "SECURE" ? "text-emerald-400" : "text-red-400"}`}>
+                <span
+                  className={`font-mono font-bold ${liveTelemetry.securityStatus === "SECURE" ? "text-emerald-400" : "text-red-400"}`}
+                >
                   {liveTelemetry.securityStatus}
                 </span>
               </div>
               <div className="flex justify-between items-center py-1.5 border-b border-zinc-900">
                 <span className="text-zinc-400">Medical SLA Response:</span>
-                <span className={`font-mono font-bold ${liveTelemetry.medicalStatus === "CRITICAL" ? "text-red-400 animate-pulse" : "text-emerald-400"}`}>
+                <span
+                  className={`font-mono font-bold ${liveTelemetry.medicalStatus === "CRITICAL" ? "text-red-400 animate-pulse" : "text-emerald-400"}`}
+                >
                   {liveTelemetry.medicalStatus} (under 3m)
                 </span>
               </div>
               <div className="flex justify-between items-center py-1.5 border-b border-zinc-900">
                 <span className="text-zinc-400">Volunteer Readiness:</span>
-                <span className="text-zinc-250 font-bold font-mono">{liveTelemetry.volunteerReadiness}%</span>
+                <span className="text-zinc-250 font-bold font-mono">
+                  {liveTelemetry.volunteerReadiness}%
+                </span>
               </div>
               <div className="flex justify-between items-center py-1.5">
                 <span className="text-zinc-400">ADA Path Accessibility:</span>
-                <span className="text-zinc-250 font-bold font-mono">{liveTelemetry.accessibilityReadiness}%</span>
+                <span className="text-zinc-250 font-bold font-mono">
+                  {liveTelemetry.accessibilityReadiness}%
+                </span>
               </div>
             </div>
           </div>
 
           <div className="bg-primary/5 border border-primary/20 p-3 rounded-lg text-[10px] text-zinc-400 flex items-center gap-2">
             <Info size={14} className="text-primary flex-shrink-0" />
-            <span>Updates automatically upon scenario ingestion or telemetry shifts.</span>
+            <span>
+              Updates automatically upon scenario ingestion or telemetry shifts.
+            </span>
           </div>
         </div>
       </div>
 
       {/* Main Grid: Explainable recommendations, Timeline & Charts */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        
         {/* Explainable AI Recommendations (Col span 2) */}
         <div className="xl:col-span-2 space-y-6">
-          
           <div className="bg-card border border-border p-5 rounded-xl space-y-4">
             <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
               <h2 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
@@ -1041,7 +1441,10 @@ export default function MissionControlPage() {
 
             <div className="space-y-4">
               {liveTelemetry.recommendations.map((rec, idx: number) => (
-                <div key={idx} className="bg-zinc-950/80 border border-zinc-850 p-5 rounded-lg space-y-4">
+                <div
+                  key={idx}
+                  className="bg-zinc-950/80 border border-zinc-850 p-5 rounded-lg space-y-4"
+                >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-900 pb-3">
                     <div>
                       <h3 className="text-xs font-bold text-primary flex items-center gap-2">
@@ -1052,7 +1455,10 @@ export default function MissionControlPage() {
                           </span>
                         )}
                       </h3>
-                      <span className="text-[9px] text-zinc-500 font-mono">Generated: {rec.time} | Confidence: {Math.round(rec.confidence * 100)}%</span>
+                      <span className="text-[9px] text-zinc-500 font-mono">
+                        Generated: {rec.time} | Confidence:{" "}
+                        {Math.round(rec.confidence * 100)}%
+                      </span>
                     </div>
 
                     {rec.requiresApproval && (
@@ -1065,7 +1471,9 @@ export default function MissionControlPage() {
                           Approve
                         </button>
                         <button
-                          onClick={() => handleCommandApproval(rec.title, false)}
+                          onClick={() =>
+                            handleCommandApproval(rec.title, false)
+                          }
                           disabled={approvedCommands[rec.title] !== undefined}
                           className="bg-red-600 hover:bg-red-700 text-white font-bold px-3 py-1.5 rounded text-[10px] transition disabled:opacity-50"
                         >
@@ -1078,31 +1486,49 @@ export default function MissionControlPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                     <div className="space-y-2.5">
                       <div>
-                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">Why:</strong>
+                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">
+                          Why:
+                        </strong>
                         <span className="text-zinc-300">{rec.why}</span>
                       </div>
                       <div>
-                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">Evidence:</strong>
+                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">
+                          Evidence:
+                        </strong>
                         <span className="text-zinc-300">{rec.evidence}</span>
                       </div>
                       <div>
-                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">Alternative Actions:</strong>
-                        <span className="text-zinc-300">{rec.alternatives}</span>
+                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">
+                          Alternative Actions:
+                        </strong>
+                        <span className="text-zinc-300">
+                          {rec.alternatives}
+                        </span>
                       </div>
                     </div>
 
                     <div className="space-y-2.5">
                       <div>
-                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">Potential Risks:</strong>
+                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">
+                          Potential Risks:
+                        </strong>
                         <span className="text-zinc-300">{rec.risks}</span>
                       </div>
                       <div>
-                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">Expected Improvement:</strong>
-                        <span className="text-zinc-300">{rec.expectedImprovement}</span>
+                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">
+                          Expected Improvement:
+                        </strong>
+                        <span className="text-zinc-300">
+                          {rec.expectedImprovement}
+                        </span>
                       </div>
                       <div>
-                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">Affected Departments:</strong>
-                        <span className="text-zinc-300">{rec.depts.join(", ")}</span>
+                        <strong className="text-zinc-500 uppercase tracking-widest text-[9px] block">
+                          Affected Departments:
+                        </strong>
+                        <span className="text-zinc-300">
+                          {rec.depts.join(", ")}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -1125,15 +1551,23 @@ export default function MissionControlPage() {
                 <div className="h-28 w-full flex items-end">
                   <svg className="w-full h-full">
                     {/* Grid line */}
-                    <line x1="0" y1="80" x2="500" y2="80" stroke="#27272a" strokeWidth="1" strokeDasharray="3" />
+                    <line
+                      x1="0"
+                      y1="80"
+                      x2="500"
+                      y2="80"
+                      stroke="#27272a"
+                      strokeWidth="1"
+                      strokeDasharray="3"
+                    />
                     {/* Dynamic line representation */}
                     <path
                       d={
                         activeScenarioName === "Pre-Match"
                           ? "M 0 90 Q 100 80 200 60 T 400 30"
                           : activeScenarioName === "Crowd Surge"
-                          ? "M 0 90 Q 100 80 200 30 T 400 10"
-                          : "M 0 90 Q 100 70 200 50 T 400 40"
+                            ? "M 0 90 Q 100 80 200 30 T 400 10"
+                            : "M 0 90 Q 100 70 200 50 T 400 40"
                       }
                       fill="none"
                       stroke="#818cf8"
@@ -1154,14 +1588,22 @@ export default function MissionControlPage() {
                 </span>
                 <div className="h-28 w-full flex items-end">
                   <svg className="w-full h-full">
-                    <line x1="0" y1="50" x2="500" y2="50" stroke="#27272a" strokeWidth="1" strokeDasharray="3" />
+                    <line
+                      x1="0"
+                      y1="50"
+                      x2="500"
+                      y2="50"
+                      stroke="#27272a"
+                      strokeWidth="1"
+                      strokeDasharray="3"
+                    />
                     <path
                       d={
                         activeScenarioName === "Pre-Match"
                           ? "M 0 80 Q 150 40 300 60 T 500 50"
                           : activeScenarioName === "Halftime"
-                          ? "M 0 60 Q 150 30 300 20 T 500 10"
-                          : "M 0 70 Q 150 50 300 40 T 500 30"
+                            ? "M 0 60 Q 150 30 300 20 T 500 10"
+                            : "M 0 70 Q 150 50 300 40 T 500 30"
                       }
                       fill="none"
                       stroke="#34d399"
@@ -1180,28 +1622,35 @@ export default function MissionControlPage() {
 
         {/* Live AI Timeline & Command Audit Ledger */}
         <div className="space-y-6">
-          
           {/* Animated timeline */}
           <div className="bg-card border border-border p-5 rounded-xl space-y-4">
             <h2 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2 border-b border-zinc-800 pb-2">
               <Clock size={16} className="text-primary animate-pulse" />
               Live AI Operational Reasoning Timeline
             </h2>
-            
+
             <div className="relative pl-6 border-l border-zinc-800 space-y-5 py-2">
               {liveTelemetry.timeline.map((item, idx: number) => (
                 <div key={idx} className="relative flex flex-col gap-1 text-xs">
                   {/* Timeline dot */}
-                  <span className={`absolute -left-[30px] top-1 h-3.5 w-3.5 rounded-full border-2 border-zinc-950 ${
-                    item.status === "alert" ? "bg-red-500 animate-ping" : "bg-emerald-500"
-                  }`}></span>
+                  <span
+                    className={`absolute -left-[30px] top-1 h-3.5 w-3.5 rounded-full border-2 border-zinc-950 ${
+                      item.status === "alert"
+                        ? "bg-red-500 animate-ping"
+                        : "bg-emerald-500"
+                    }`}
+                  ></span>
                   <div className="flex justify-between items-center">
-                    <span className="font-mono text-[9px] text-zinc-500">{item.time}</span>
+                    <span className="font-mono text-[9px] text-zinc-500">
+                      {item.time}
+                    </span>
                     <span className="text-[9px] bg-zinc-900 border border-zinc-850 px-1.5 py-0.5 rounded text-zinc-400 font-bold uppercase">
                       {item.agent}
                     </span>
                   </div>
-                  <p className="text-zinc-200 font-semibold leading-relaxed">{item.action}</p>
+                  <p className="text-zinc-200 font-semibold leading-relaxed">
+                    {item.action}
+                  </p>
                 </div>
               ))}
             </div>
@@ -1219,12 +1668,19 @@ export default function MissionControlPage() {
             ) : (
               <div className="space-y-2">
                 {executedCommands.map((cmd, idx) => (
-                  <div key={idx} className="bg-zinc-950/70 border border-zinc-850 p-3 rounded-lg flex items-center justify-between text-xs">
+                  <div
+                    key={idx}
+                    className="bg-zinc-950/70 border border-zinc-850 p-3 rounded-lg flex items-center justify-between text-xs"
+                  >
                     <div className="flex items-center gap-2">
                       <CheckCircle size={14} className="text-emerald-500" />
                       <div>
-                        <span className="font-semibold text-zinc-200 block">{cmd}</span>
-                        <span className="text-[9px] text-zinc-500 font-mono">RBAC Override Signed</span>
+                        <span className="font-semibold text-zinc-200 block">
+                          {cmd}
+                        </span>
+                        <span className="text-[9px] text-zinc-500 font-mono">
+                          RBAC Override Signed
+                        </span>
                       </div>
                     </div>
                     <span className="text-[9px] text-zinc-400 bg-zinc-900 px-2 py-1 rounded">
@@ -1236,7 +1692,6 @@ export default function MissionControlPage() {
             )}
           </div>
         </div>
-
       </div>
     </div>
   );

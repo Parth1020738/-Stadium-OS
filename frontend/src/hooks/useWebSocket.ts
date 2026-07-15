@@ -21,12 +21,10 @@ export const useWebSocket = (channel: string) => {
         channel ? `/${channel}` : ""
       }?token=${accessToken}`;
 
-      console.log(`Connecting to WebSocket: ${wsUrl}`);
       const socket = new WebSocket(wsUrl);
       socketRef.current = socket;
 
       socket.onopen = () => {
-        console.log(`WebSocket connected to channel: ${channel}`);
         setWsConnected(true);
         reconnectAttemptsRef.current = 0;
 
@@ -45,7 +43,7 @@ export const useWebSocket = (channel: string) => {
           const data = JSON.parse(event.data);
           // Broadcast message parser to Zustand telemetryStore
           const telemetryStore = useTelemetryStore.getState();
-          
+
           if (channel === "metrics") {
             telemetryStore.updateMetrics(data);
           } else if (channel === "alerts") {
@@ -53,26 +51,29 @@ export const useWebSocket = (channel: string) => {
           } else if (channel === "crowd") {
             telemetryStore.setCrowdCount(data.estimated_count || 0);
           }
-        } catch (e) {
-          console.error("Error parsing WebSocket event data:", e);
+        } catch {
+          // Avoid console noise in production; ignore malformed events
         }
       };
 
-      socket.onclose = (event) => {
-        console.log(`WebSocket disconnected: ${event.reason}`);
+      socket.onclose = () => {
         setWsConnected(false);
         cleanup();
 
         // Auto-reconnect logic with exponential backoff
-        const delay = Math.min(1000 * Math.pow(2, reconnectAttemptsRef.current), 30000);
+        const delay = Math.min(
+          1000 * Math.pow(2, reconnectAttemptsRef.current),
+          30000,
+        );
         reconnectAttemptsRef.current += 1;
+
         reconnectTimeoutRef.current = setTimeout(() => {
           connect();
         }, delay);
       };
 
-      socket.onerror = (error) => {
-        console.error("WebSocket encountered error:", error);
+      socket.onerror = () => {
+        // Avoid console noise in production; onclose will handle status update/reconnect
       };
     };
 
