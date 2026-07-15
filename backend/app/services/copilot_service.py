@@ -118,7 +118,12 @@ class AICopilotService:
                 "alternative_plans": ["Display static digital directional indicators."],
                 "risk": "Localized bottleneck on Ramp 2 stairs.",
                 "resources_needed": ["3 volunteers"],
-                "expected_outcome": "Redirection reduces ramp occupancy density to normal parameters."
+                "expected_outcome": "Redirection reduces ramp occupancy density to normal parameters.",
+                "data": {
+                    "deployment": {
+                        "stewards_count": 3
+                    }
+                }
             })
 
         # 6. "Best evacuation path?" or evacuation

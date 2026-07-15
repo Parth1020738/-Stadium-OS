@@ -30,15 +30,21 @@ class DemoModeService:
         details = f"Simulated scenario {scenario_name} successfully initiated."
 
         if scenario_name == "crowd_surge":
-            # Ingress crowd surge simulation
             # 1. Create a crowd snapshot
+            from sqlalchemy.future import select
+            from backend.app.models.crowd import CrowdZone
+            zone_result = await self.db.execute(select(CrowdZone).limit(1))
+            zone = zone_result.scalars().first()
+            if not zone:
+                zone = CrowdZone(name="Gate D Zone", description="Gate D area")
+                self.db.add(zone)
+                await self.db.flush()
+            
             snapshot = CrowdSnapshot(
-                total_count=78420,
-                average_density=0.88,
-                flow_rate=95.0,
-                velocity=1.2,
-                confidence_score=0.97,
-                timestamp=timestamp
+                zone_id=zone.id,
+                estimated_count=78420,
+                density_level=0.88,
+                recorded_at=timestamp
             )
             self.db.add(snapshot)
             

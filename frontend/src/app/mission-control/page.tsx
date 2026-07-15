@@ -72,6 +72,11 @@ interface BriefingDetail {
   reasoning: string;
 }
 
+interface MatchdayModeConfig {
+  ai_priority?: string;
+  expected_flow?: string;
+}
+
 export default function MissionControlPage() {
   const [query, setQuery] = useState("Gate D emergency overcrowding and shuttle delay");
   const [loading, setLoading] = useState(false);
@@ -81,7 +86,7 @@ export default function MissionControlPage() {
   const [approvedCommands, setApprovedCommands] = useState<Record<string, "approved" | "rejected">>({});
   const [commandFeedback, setCommandFeedback] = useState<string | null>(null);
   const [matchdayMode, setMatchdayMode] = useState<string>("Pre Match");
-  const [modeDetails, setModeDetails] = useState<any>(null);
+  const [modeDetails, setModeDetails] = useState<MatchdayModeConfig | null>(null);
   const [selectedDemoScenario, setSelectedDemoScenario] = useState<string>("crowd_surge");
   const [syncStatus, setSyncStatus] = useState<"SYNCED" | "SYNCING" | "ALERT">("SYNCED");
 
@@ -121,7 +126,7 @@ export default function MissionControlPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const fetchMatchdayMode = async () => {
+  async function fetchMatchdayMode() {
     try {
       const res = await apiClient.get("/ai/matchday/mode");
       if (res.data) {
@@ -131,7 +136,7 @@ export default function MissionControlPage() {
     } catch (err) {
       console.error(err);
     }
-  };
+  }
 
   const handleModeChange = async (mode: string) => {
     try {
@@ -170,7 +175,7 @@ export default function MissionControlPage() {
     }
   };
 
-  const handleRunPlanner = async (searchQuery: string) => {
+  async function handleRunPlanner(searchQuery: string) {
     setLoading(true);
     setCommandFeedback(null);
     try {
@@ -186,7 +191,7 @@ export default function MissionControlPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   const handleCommandApproval = async (commandName: string, status: "approved" | "rejected") => {
     setApprovedCommands((prev) => ({ ...prev, [commandName]: status }));

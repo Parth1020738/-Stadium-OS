@@ -258,8 +258,19 @@ class MultiAgentCoordinator:
             confidence = sust_res.get("confidence", 0.92)
             reasoning = sust_res.get("reasoning", "Smart HVAC setback maintains suit thermal comfort while reducing grid loads.")
 
+        role_titles = {
+            "ceo": "Chief Executive Officer",
+            "operations": "Chief Operations Officer",
+            "volunteer": "Volunteer Coordinator",
+            "transit": "Transit Coordinator",
+            "security": "Security Coordinator",
+            "medical": "Medical Services Chief",
+            "accessibility": "Accessibility Coordinator",
+            "sustainability": "Sustainability Director"
+        }
+
         return {
-            "role_title": role.upper() + " Executive Briefing",
+            "role_title": role_titles.get(role, role.upper() + " Executive Briefing"),
             "current_situation": current_situation,
             "major_risks": major_risks,
             "current_incidents": current_incidents,
