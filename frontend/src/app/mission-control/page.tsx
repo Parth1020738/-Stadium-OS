@@ -363,6 +363,79 @@ export default function MissionControlPage() {
         </button>
       </div>
 
+      {/* AI BRAIN BRAIN - HEALTH & OBJECTIVES PANEL */}
+      <div className="bg-gradient-to-r from-zinc-950 via-zinc-900 to-zinc-950 border border-primary/30 rounded-lg p-5 shadow-lg space-y-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-800 pb-3">
+          <div className="flex items-center gap-2">
+            <div className="p-2 bg-primary/10 rounded-lg text-primary animate-pulse">
+              <Brain size={24} />
+            </div>
+            <div>
+              <h2 className="text-md font-bold tracking-tight text-white uppercase flex items-center gap-2">
+                Stadium AI Brain Headquarters
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
+              </h2>
+              <p className="text-[10px] text-zinc-400">
+                Live operational reasoning, objective optimization, and predictive risk scoring active.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <span className="text-[9px] text-zinc-400 uppercase block font-semibold">Stadium Health</span>
+              <span className="text-xl font-black text-emerald-400 font-mono">
+                {Math.round(100 - telemetry.riskScore)}%
+              </span>
+            </div>
+            <div className="h-8 w-px bg-zinc-800"></div>
+            <div className="text-right">
+              <span className="text-[9px] text-zinc-400 uppercase block font-semibold">Operational Risk</span>
+              <span className={`text-xl font-black font-mono ${telemetry.riskScore > 50 ? "text-red-400" : "text-yellow-400"}`}>
+                {telemetry.riskScore}%
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          {/* AI Objectives */}
+          <div className="bg-zinc-900/55 border border-zinc-800 p-3 rounded-md space-y-1.5">
+            <span className="text-[10px] text-primary uppercase font-bold tracking-wider block">
+              Current AI Objectives
+            </span>
+            <ul className="space-y-1 text-zinc-300 pl-2 list-disc list-inside">
+              <li>Ingress crowd load balancing</li>
+              <li>Shuttle fleet headway tracking</li>
+              <li>ADA pathway barrier avoidance</li>
+            </ul>
+          </div>
+
+          {/* Predicted Issues */}
+          <div className="bg-zinc-900/55 border border-zinc-800 p-3 rounded-md space-y-1.5">
+            <span className="text-[10px] text-yellow-500 uppercase font-bold tracking-wider block">
+              Predicted Issues
+            </span>
+            <ul className="space-y-1 text-zinc-300 pl-2 list-disc list-inside">
+              <li>Turnstile bottleneck at Gate D</li>
+              <li>Outer Ring Road shuttle delay</li>
+              <li>Gate C lift lock warning</li>
+            </ul>
+          </div>
+
+          {/* Suggested Actions */}
+          <div className="bg-zinc-900/55 border border-zinc-800 p-3 rounded-md space-y-1.5">
+            <span className="text-[10px] text-emerald-500 uppercase font-bold tracking-wider block">
+              Active Recommendations
+            </span>
+            <ul className="space-y-1 text-zinc-300 pl-2 list-disc list-inside">
+              <li>Deploy 5 stewards to Gate D</li>
+              <li>Activate Ramp B accessibility path</li>
+              <li>Increase Metro shuttle frequency</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Main Dashboard Layout */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         

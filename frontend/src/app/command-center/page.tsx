@@ -281,6 +281,60 @@ export default function CommandCenterPage() {
                     {JSON.stringify(selectedCommand.payload, null, 2)}
                   </pre>
                 </div>
+
+                {/* AI Executive Justification */}
+                <div className="bg-primary/5 border border-primary/20 p-4 rounded-lg space-y-3">
+                  <div className="flex items-center gap-1.5 text-primary font-bold text-xs uppercase">
+                    <Terminal size={14} className="animate-pulse" />
+                    <span>AI Command Justification</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px] leading-relaxed text-zinc-300">
+                    <div className="space-y-2">
+                      <div>
+                        <strong className="text-zinc-400 block uppercase text-[9px]">Why this command:</strong>
+                        <span>Relieve scanning bottlenecks and optimize entrance throughput.</span>
+                      </div>
+                      <div>
+                        <strong className="text-zinc-400 block uppercase text-[9px]">Evidence:</strong>
+                        <span>Ingress rate is 68 guests/min vs turnstile capacity of 48 scans/min.</span>
+                      </div>
+                      <div>
+                        <strong className="text-zinc-400 block uppercase text-[9px]">Expected Outcome:</strong>
+                        <span>Stabilized turnstile flow, eliminating queue backups in 6 minutes.</span>
+                      </div>
+                      <div>
+                        <strong className="text-zinc-400 block uppercase text-[9px]">Risks:</strong>
+                        <span>Increased steward vigilance needed to prevent tailgating.</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div>
+                        <strong className="text-zinc-400 block uppercase text-[9px]">Alternatives:</strong>
+                        <span>Manual ticket check bypass or redirecting guests to Gate E.</span>
+                      </div>
+                      <div>
+                        <strong className="text-zinc-400 block uppercase text-[9px]">Affected Departments:</strong>
+                        <span>Crowd Management, Security, Volunteers.</span>
+                      </div>
+                      <div>
+                        <strong className="text-zinc-400 block uppercase text-[9px]">Estimated Improvement:</strong>
+                        <span>22% clearance latency reduction.</span>
+                      </div>
+                      <div className="flex justify-between items-center bg-zinc-950 p-1.5 rounded border border-zinc-800">
+                        <div>
+                          <strong className="text-zinc-400 block uppercase text-[9px]">AI Confidence:</strong>
+                          <span className="text-emerald-400 font-bold">94%</span>
+                        </div>
+                        <div>
+                          <strong className="text-zinc-400 block uppercase text-[9px]">Required Auth:</strong>
+                          <span className="text-yellow-500 font-semibold">Dual Approval</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Approval controls - visible if status is Pending */}

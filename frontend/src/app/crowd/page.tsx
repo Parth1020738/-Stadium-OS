@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api-client";
 import { useTelemetryStore } from "@/store/telemetryStore";
 import { Users, Filter, Search, ShieldAlert, TrendingUp } from "lucide-react";
+import AIInsightCard from "@/components/common/AIInsightCard";
 
 interface ZoneResponse {
   id: number;
@@ -49,6 +50,10 @@ export default function CrowdPage() {
       z.description?.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleExecuteCommand = (cmd: string) => {
+    alert(`AI Dispatching Command: ${cmd}`);
+  };
+
   return (
     <div className="space-y-6">
       <div>
@@ -57,6 +62,9 @@ export default function CrowdPage() {
           Monitor stadium stands density, occupancy metrics, and pedestrian safety levels.
         </p>
       </div>
+
+      {/* AI Insight Card */}
+      <AIInsightCard page="crowd" onExecuteCommand={handleExecuteCommand} />
 
       {/* KPI occupancy card row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { apiClient } from "@/lib/api-client";
 import { useAuthStore } from "@/store/authStore";
+import AIInsightCard from "@/components/common/AIInsightCard";
 import {
   AlertTriangle,
   Search,
@@ -69,7 +70,7 @@ export default function IncidentsPage() {
       const params: Record<string, string> = {};
       if (priorityFilter !== "All") params.priority = priorityFilter;
       if (search) params.search = search;
-      const res = await apiClient.get("/incidents", { params });
+      const res = await apiClient.get("/incidents/", { params });
       return res.data;
     },
   });
@@ -107,7 +108,7 @@ export default function IncidentsPage() {
   // React Query Mutations: Submit Incident
   const createIncidentMutation = useMutation({
     mutationFn: async (payload: CreateIncidentFields) => {
-      const res = await apiClient.post("/incidents", payload);
+      const res = await apiClient.post("/incidents/", payload);
       return res.data;
     },
     onSuccess: () => {
@@ -125,8 +126,16 @@ export default function IncidentsPage() {
       });
       return res.data;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["incident-details", selectedIncident?.id] });
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["incidents"] });
+      // Update selected incident reference to reflect comments list
+      setSelectedIncident((prev) => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          comments: [...(prev.comments || []), data],
+        };
+      });
       resetCommentForm();
     },
   });
@@ -157,6 +166,10 @@ export default function IncidentsPage() {
     }
   };
 
+  const handleExecuteCommand = (cmd: string) => {
+    alert(`AI Dispatching Command: ${cmd}`);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-border">
@@ -174,6 +187,9 @@ export default function IncidentsPage() {
           <span>Report Incident</span>
         </button>
       </div>
+
+      {/* AI Insight Card */}
+      <AIInsightCard page="incident" onExecuteCommand={handleExecuteCommand} />
 
       {/* Toolbar filters */}
       <div className="flex items-center gap-4 bg-card border border-border p-4 rounded-lg">

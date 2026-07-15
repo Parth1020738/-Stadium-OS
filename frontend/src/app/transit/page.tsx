@@ -8,6 +8,7 @@ import * as z from "zod";
 import { apiClient } from "@/lib/api-client";
 import { useTelemetryStore } from "@/store/telemetryStore";
 import { useAuthStore } from "@/store/authStore";
+import AIInsightCard from "@/components/common/AIInsightCard";
 import { Bus, Settings, Loader2 } from "lucide-react";
 
 // Form validation schema
@@ -77,6 +78,10 @@ export default function TransitPage() {
     updatePacingMutation.mutate(data);
   };
 
+  const handleExecuteCommand = (cmd: string) => {
+    alert(`AI Dispatching Command: ${cmd}`);
+  };
+
   return (
     <div className="space-y-6">
       <div className="pb-4 border-b border-border">
@@ -85,6 +90,9 @@ export default function TransitPage() {
           Track shuttle fleet locations, schedules, and dynamic egress turnstile pacing.
         </p>
       </div>
+
+      {/* AI Insight Card */}
+      <AIInsightCard page="transit" onExecuteCommand={handleExecuteCommand} />
 
       {/* Transit stats row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

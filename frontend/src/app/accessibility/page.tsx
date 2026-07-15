@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { apiClient } from "@/lib/api-client";
 import { Accessibility, Search, AlertOctagon, Plus, Loader2, Info } from "lucide-react";
+import AIInsightCard from "@/components/common/AIInsightCard";
 
 // Form validation schema
 const barrierSchema = z.object({
@@ -34,6 +35,10 @@ export default function AccessibilityPage() {
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
+
+  const handleExecuteCommand = (cmd: string) => {
+    alert(`AI Dispatching Command: ${cmd}`);
+  };
 
   // React Query: Fetch accessibility barriers for stadium_main
   const { data: barriers, isLoading, error } = useQuery<BarrierItem[]>({
@@ -112,6 +117,9 @@ export default function AccessibilityPage() {
           <span>Report Barrier</span>
         </button>
       </div>
+
+      {/* AI Insight Card */}
+      <AIInsightCard page="accessibility" onExecuteCommand={handleExecuteCommand} />
 
       {/* KPI Cards Row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

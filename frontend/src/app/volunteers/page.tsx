@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api-client";
 import { ShieldCheck, Search, Filter, Phone, Mail, Award, Clock } from "lucide-react";
 
+import AIInsightCard from "@/components/common/AIInsightCard";
+
 interface VolunteerItem {
   id: number;
   first_name: string;
@@ -27,7 +29,6 @@ export default function VolunteersPage() {
       const params: Record<string, string> = {};
       if (search) params.search = search;
       const res = await apiClient.get("/volunteers", { params });
-      // Depending on backend design, results could be wrapped inPaginationResponse or direct array
       const data = res.data;
       if (Array.isArray(data)) return { results: data };
       if (data.results) return data;
@@ -35,6 +36,10 @@ export default function VolunteersPage() {
       return { results: [] };
     },
   });
+
+  const handleExecuteCommand = (cmd: string) => {
+    alert(`AI Dispatching Command: ${cmd}`);
+  };
 
   return (
     <div className="space-y-6">
@@ -44,6 +49,9 @@ export default function VolunteersPage() {
           Track stadium staff registries, certifications, and sector assignments.
         </p>
       </div>
+
+      {/* AI Insight Card */}
+      <AIInsightCard page="volunteer" onExecuteCommand={handleExecuteCommand} />
 
       {/* Roster statistics row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
