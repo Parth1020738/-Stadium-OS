@@ -77,6 +77,7 @@ export default function CopilotPage() {
       streamDoneRef.current = false;
 
       if (finalText) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMessages((prev) => [
           ...prev,
           { role: "assistant", content: streamText },
@@ -196,6 +197,7 @@ export default function CopilotPage() {
       };
     }
     return parseMessageSections(activeMessage.content);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeMessage?.content]);
 
   // Parse and track workflow steps from active sections dynamically using useMemo

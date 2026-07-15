@@ -20,8 +20,8 @@
     "dev:frontend": "start_frontend.bat",
     "start": "start_all.bat",
     "stop": "stop_all.bat",
-    "verify": "python verify_environment.py",
-    "health": "python health_check.py",
+    "verify": "python scripts/verify_environment.py",
+    "health": "python scripts/health_check.py",
     "clean": "python -c \"import shutil, os; [shutil.rmtree(os.path.join(root, d)) for root, dirs, files in os.walk('.') for d in dirs if d == '__pycache__']\" 2>/dev/null || echo Cleanup complete"
   },
   "devDependencies": {

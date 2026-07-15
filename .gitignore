@@ -62,3 +62,11 @@ test-results
 !docs/screenshots/*.jpg
 .devcontainer/
 
+# Temporary and clean directories
+tmp/
+temp/
+brain/
+scratch/
+reports/generated/
+
+
